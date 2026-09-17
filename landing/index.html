@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HimoPay — Pay Smart, Move Fast with Modern Fintech</title>
+  <meta name="description" content="HimoPay transforms modern payments with zero-fee wallet transfers, instant QR payments, contactless NFC cards, and rewarding loyalty tiers. Download for Android and iOS.">
+  <link rel="icon" type="image/png" href="assets/images/app_logo_orange.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── 1. Sticky Navigation Header ── -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" id="brand-logo">
+        <img src="assets/images/app_logo_orange.png" alt="HimoPay Logo" class="logo-icon">
+        <span class="logo-text">Himo<span class="logo-accent">Pay</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#problems" class="nav-link">Problems</a>
+        <a href="#solutions" class="nav-link">Solutions</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#security" class="nav-link">Security</a>
+        <a href="#download" class="nav-link">Download</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#download" class="btn-ghost" id="nav-login-btn">Releases</a>
+        <a href="#download" class="btn-primary" id="nav-get-started-btn">
+          <span>Get Started</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── 2. Hero Section (FinFix Reference Alignment) ── -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      
+      <!-- Left Column: Copy & CTAs -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Next-Gen Financial Ecosystem</span>
+        </div>
+
+        <h1 class="hero-title">
+          Invest Smart,<br>
+          Grow Fast with<br>
+          <span class="title-highlight">HimoPay</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Turn your spare change into financial momentum with automated micro-investing, instant zero-fee QR transfers, and smart debit cards.
+        </p>
+
+        <!-- Bullet Checkmarks -->
+        <ul class="hero-bullets">
+          <li>
+            <span class="check-icon">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span>Accessible for All (Instant 60s Onboarding)</span>
+          </li>
+          <li>
+            <span class="check-icon">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span>Effortless Wealth & Wallet Building</span>
+          </li>
+          <li>
+            <span class="check-icon">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span>Inclusive Zero-Fee Payment Opportunities</span>
+          </li>
+        </ul>
+
+        <!-- Hero Buttons -->
+        <div class="hero-actions">
+          <a href="downloads/HimoPay-release.apk" download="HimoPay-release.apk" class="btn-primary hero-btn" id="hero-download-apk">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0003 0-.551.4482-.9993.9993-.9993.551 0 .9993.4483.9993.9993 0 .5517-.4483 1.0003-.9993 1.0003m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0003 0-.551.4482-.9993.9993-.9993.551 0 .9993.4483.9993.9993 0 .5517-.4483 1.0003-.9993 1.0003m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.152-.5671.416.416 0 00-.568.152l-2.0223 3.503c-1.6385-.7472-3.4735-1.1643-5.4365-1.1643-1.963 0-3.798.4171-5.4365 1.1643L4.2412 5.4471a.416.416 0 00-.568-.152.416.416 0 00-.152.5671l1.9973 3.4592C2.6889 10.9993 1 13.9785 1 17.3828h22c0-3.4043-1.6889-6.3835-4.5185-8.0614"/></svg>
+            <div class="btn-double-text">
+              <span class="btn-subtext">Direct Download</span>
+              <span class="btn-maintext">Download APK (v1.0.0)</span>
+            </div>
+          </a>
+
+          <button class="btn-secondary hero-btn" id="open-qr-modal-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h6v6H3V3zm12 0h6v6h-6V3zM3 15h6v6H3v-6zm12 0h2v2h-2v-2zm4 0h2v6h-2v-6zm-4 4h2v2h-2v-2zM7 7H5V5h2v2zm12 0h-2V5h2v2zM7 19H5v-2h2v2z"/></svg>
+            <span>Scan QR on Mobile</span>
+          </button>
+        </div>
+
+        <div class="hero-download-meta">
+          <span class="meta-item">Android 7.0+</span>
+          <span class="meta-dot">·</span>
+          <span class="meta-item">Size: 61.9 MB (Clean Build)</span>
+          <span class="meta-dot">·</span>
+          <span class="meta-item text-success">Verified & Malware Free</span>
+        </div>
+      </div>
+
+      <!-- Right Column: 3D Smartphone Visual Mockup -->
+      <div class="hero-visual">
+        <div class="mockup-wrapper">
+          <div class="mockup-glow"></div>
+          <img src="assets/images/hero_phone_mockup.jpg" alt="HimoPay 3D Smartphone Interface" class="mockup-image" id="hero-mockup-img">
+          
+          <!-- Floating UI Badges -->
+          <div class="floating-badge badge-top-left">
+            <div class="badge-icon-wrap orange">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="badge-content">
+              <span class="badge-title">Instant Cash-In</span>
+              <span class="badge-sub">+250,000 MMK received</span>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-bottom-right">
+            <div class="badge-icon-wrap green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="badge-content">
+              <span class="badge-title">Zero Hidden Fees</span>
+              <span class="badge-sub">100% Transparent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 3. Trust Metrics & Social Proof Strip ── -->
+  <section class="metrics-strip">
+    <div class="container">
+      <div class="metrics-scroller">
+        <div class="metric-item">
+          <span class="metric-bold">4.8★</span>
+          <span class="metric-label">Google Play Rating</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-bold">4.7★</span>
+          <span class="metric-label">Apple App Store</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-bold">2026</span>
+          <span class="metric-label">Brand Evolution</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-bold">1,00,000+</span>
+          <span class="metric-label">Active Users</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-bold">$10M+</span>
+          <span class="metric-label">Processed Volume</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-item">
+          <span class="metric-bold">99.99%</span>
+          <span class="metric-label">Uptime Reliability</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. Problem & Solution Section (FinFix 5-Card Layout) ── -->
+  <section class="problems-section" id="problems">
+    <div class="container">
+      
+      <div class="section-header">
+        <h2 class="section-title">
+          Breaking Down the Complexities<br>
+          of Traditional Finance
+        </h2>
+        <p class="section-subtitle">
+          Without modern financial infrastructure, moving money is slow, expensive, and stressful. HimoPay delivers frictionless financial freedom at your fingertips.
+        </p>
+      </div>
+
+      <!-- 5-Card Grid matching FinFix reference -->
+      <div class="cards-grid">
+        
+        <!-- Card 1: High Entry Barriers -->
+        <div class="problem-card">
+          <h3 class="card-title">High Entry Barriers</h3>
+          <div class="card-icon-box">
+            <svg class="icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 8v4m0 4h.01"/>
+            </svg>
+          </div>
+          <p class="card-desc">
+            Many traditional banking platforms require significant upfront minimum deposits and tedious branch visits, making it difficult for everyday users to begin.
+          </p>
+        </div>
+
+        <!-- Card 2: Complex Processes -->
+        <div class="problem-card">
+          <h3 class="card-title">Complex Processes</h3>
+          <div class="card-icon-box">
+            <svg class="icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v2m0 8v2m-6-6h2m8 0h2m-4.24-4.24l1.41-1.41m-8.48 8.48l1.41-1.41m0-8.48L6.34 6.34m8.48 8.48l1.41 1.41"/>
+            </svg>
+          </div>
+          <p class="card-desc">
+            Managing accounts can be overwhelming, especially for beginners, due to confusing financial jargon, outdated interfaces, and fragmented verification steps.
+          </p>
+        </div>
+
+        <!-- Card 3: Limited Accessibility -->
+        <div class="problem-card">
+          <h3 class="card-title">Limited Accessibility</h3>
+          <div class="card-icon-box">
+            <svg class="icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 15s1.5-2 4-2 4 2 4 2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+          </div>
+          <p class="card-desc">
+            High-value assets and seamless contactless tools have been restricted to premier banking tiers, excluding individuals from frictionless modern payment tools.
+          </p>
+        </div>
+
+        <!-- Card 4: Lack of Financial Clarity (Wide) -->
+        <div class="problem-card card-wide">
+          <h3 class="card-title">Lack of Financial Clarity & Tracking</h3>
+          <div class="card-icon-box">
+            <svg class="icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M18 20V10M12 20V4M6 20v-6"/>
+            </svg>
+          </div>
+          <p class="card-desc">
+            Many individuals lack real-time visibility into where their money goes, missing out on structured rewards, category spending trends, and financial growth opportunities.
+          </p>
+        </div>
+
+        <!-- Card 5: Hidden Fees and Poor Transparency (Wide) -->
+        <div class="problem-card card-wide">
+          <h3 class="card-title">Hidden Fees and Poor Transparency</h3>
+          <div class="card-icon-box">
+            <svg class="icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v12M9 9h4.5a2.5 2.5 0 0 1 0 5H9"/>
+            </svg>
+          </div>
+          <p class="card-desc">
+            Surprise transaction surcharges and opaque maintenance policies erode user trust. HimoPay delivers transparent zero-surprise rates with real-time digital receipts.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. Solutions & Core Features ── -->
+  <section class="solutions-section" id="solutions">
+    <div class="container">
+      <div class="section-header">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>The HimoPay Advantage</span>
+        </div>
+        <h2 class="section-title">Engineered for Seamless Everyday Finance</h2>
+        <p class="section-subtitle">Everything you need to send, receive, pay, and earn with military-grade safety.</p>
+      </div>
+
+      <div class="solutions-grid">
+        
+        <div class="solution-card">
+          <div class="solution-num">01</div>
+          <div class="solution-content">
+            <h3>Instant QR & P2P Transfers</h3>
+            <p>Scan any merchant QR code or send funds directly to any phone number in less than 2 seconds. Zero transfer fees across the network.</p>
+          </div>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-num">02</div>
+          <div class="solution-content">
+            <h3>Contactless NFC & Virtual Cards</h3>
+            <p>Order physical debit cards with laser-engraved luxury finishes or generate instant virtual cards for safe online subscriptions.</p>
+          </div>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-num">03</div>
+          <div class="solution-content">
+            <h3>VIP Tier Rewards & Vouchers</h3>
+            <p>Climb from Bronze to Platinum tiers to unlock cashbacks, exclusive merchant discount vouchers, and priority customer service.</p>
+          </div>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-num">04</div>
+          <div class="solution-content">
+            <h3>Bank-Grade Supabase Encryption</h3>
+            <p>Fortified with biometric FaceID / TouchID authentication, AES-256 data protection, and real-time fraud monitoring.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. Download Hub Section ── -->
+  <section class="download-section" id="download">
+    <div class="container">
+      <div class="download-banner">
+        
+        <div class="download-left">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>Available for Mobile</span>
+          </div>
+          <h2 class="download-title">Get HimoPay on Your Phone Today</h2>
+          <p class="download-desc">
+            Download the official release APK directly to your Android device or access our iOS version. Setup takes under 60 seconds.
+          </p>
+
+          <div class="download-buttons-group">
+            <!-- Direct APK button -->
+            <a href="downloads/HimoPay-release.apk" download="HimoPay-release.apk" class="btn-primary dl-btn" id="dl-apk-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0003 0-.551.4482-.9993.9993-.9993.551 0 .9993.4483.9993.9993 0 .5517-.4483 1.0003-.9993 1.0003m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0003 0-.551.4482-.9993.9993-.9993.551 0 .9993.4483.9993.9993 0 .5517-.4483 1.0003-.9993 1.0003m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.152-.5671.416.416 0 00-.568.152l-2.0223 3.503c-1.6385-.7472-3.4735-1.1643-5.4365-1.1643-1.963 0-3.798.4171-5.4365 1.1643L4.2412 5.4471a.416.416 0 00-.568-.152.416.416 0 00-.152.5671l1.9973 3.4592C2.6889 10.9993 1 13.9785 1 17.3828h22c0-3.4043-1.6889-6.3835-4.5185-8.0614"/></svg>
+              <div>
+                <span class="btn-subtext">Android Direct</span>
+                <span class="btn-maintext">Download APK (61.9 MB)</span>
+              </div>
+            </a>
+
+            <!-- iOS App Store / TestFlight -->
+            <a href="https://github.com/hmyat3366-ai/Himo-Pay/releases" target="_blank" rel="noopener noreferrer" class="btn-secondary dl-btn" id="dl-ios-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.61 1.33-.55.63-1.03 1.68-.9 2.7.99.08 2.01-.5 2.58-1.18z"/></svg>
+              <div>
+                <span class="btn-subtext">Apple Ecosystem</span>
+                <span class="btn-maintext">iOS TestFlight / Store</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="apk-info-box">
+            <div class="info-row">
+              <span class="info-label">Version:</span>
+              <span class="info-val">v1.0.0 (Release Build)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Architecture:</span>
+              <span class="info-val">Universal (arm64-v8a, armeabi-v7a, x86_64)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Source Code:</span>
+              <a href="https://github.com/hmyat3366-ai/Himo-Pay" target="_blank" rel="noopener noreferrer" class="info-link">github.com/hmyat3366-ai/Himo-Pay</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Scannable QR Code -->
+        <div class="download-right">
+          <div class="qr-card">
+            <div class="qr-image-wrap">
+              <img src="assets/images/qr_download.png" alt="HimoPay Direct Download QR Code" class="qr-image" id="qr-code-img">
+            </div>
+            <div class="qr-caption">
+              <span class="qr-heading">Scan with Phone Camera</span>
+              <span class="qr-sub">Instant direct install link for Android & iOS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. Frequently Asked Questions ── -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Got questions? We're here to help you get started effortlessly.</p>
+      </div>
+
+      <div class="faq-accordion">
+        
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I install the Android APK directly on my phone?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>1. Tap the "Download APK" button on your phone or scan the QR code.<br>
+            2. When the download finishes, tap the notification or open your phone's File Manager.<br>
+            3. Tap <strong>Install</strong>. If prompted, toggle "Allow from this source" in Android settings.<br>
+            4. Once installed, the HimoPay orange icon will appear on your Home Screen!</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Are peer-to-peer transfers completely free?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! All peer-to-peer transfers between HimoPay users using phone numbers or QR codes are 100% free with zero commission.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How safe is my money and personal data?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>HimoPay uses bank-level AES-256 encryption, Supabase cloud infrastructure with strict Row-Level Security (RLS), and biometric authentication (FaceID / Fingerprint) for every transaction approval.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I order the physical Himo contactless card?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Inside the HimoPay app, go to the <strong>Wallet</strong> tab, tap <strong>Order Physical Card</strong>, select your preferred card tier, and submit your delivery address. Your card will be dispatched within 48 hours.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. Footer ── -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="#" class="brand-logo">
+          <img src="assets/images/app_logo_orange.png" alt="HimoPay Logo" class="logo-icon">
+          <span class="logo-text">Himo<span class="logo-accent">Pay</span></span>
+        </a>
+        <p class="footer-tagline">
+          The next-generation fintech platform for borderless, effortless payments.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Wallet & Cards</a>
+          <a href="#solutions">QR Payments</a>
+          <a href="#problems">Rewards & Tiers</a>
+          <a href="#download">Direct Download</a>
+        </div>
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <a href="https://github.com/hmyat3366-ai/Himo-Pay" target="_blank">GitHub Repository</a>
+          <a href="https://github.com/hmyat3366-ai/Himo-Pay/releases" target="_blank">Release Notes</a>
+          <a href="#download">APK Checksums</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Safety</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security Overview</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 HimoPay Inc. All rights reserved.</p>
+      <div class="footer-socials">
+        <span>Fast · Secure · Modern Payments</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── 9. Interactive QR Code Modal ── -->
+  <div class="modal-backdrop" id="qr-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-header">
+        <img src="assets/images/app_logo_orange.png" alt="HimoPay" class="modal-logo">
+        <h3>Install HimoPay on Mobile</h3>
+        <p>Point your phone's camera at the QR code below to download the app directly.</p>
+      </div>
+      <div class="modal-qr-wrap">
+        <img src="assets/images/qr_download.png" alt="Download QR Code" class="modal-qr-img">
+      </div>
+      <div class="modal-footer-btns">
+        <a href="downloads/HimoPay-release.apk" download="HimoPay-release.apk" class="btn-primary full-width">
+          <span>Download to Computer Instead</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
