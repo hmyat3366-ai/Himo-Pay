@@ -1,0 +1,4244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Himo Pay — Premium Mobile Wallet</title>
+<meta name="description" content="Himo Pay — A calm, premium, modern digital payment experience for Myanmar users.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   HIMO PAY — DESIGN SYSTEM FOUNDATION
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  /* Color Tokens */
+  --c-primary:       #C8A978;
+  --c-primary-dark:  #A88752;
+  --c-primary-soft:  #F3EBDD;
+  --c-primary-deep:  #8B6F42;
+
+  --c-black:         #0A0A0A;
+  --c-soft-black:    #171717;
+  --c-dark-80:       #1A1A1A;
+  --c-dark-60:       #2A2A2A;
+  --c-dark-40:       #3A3A3A;
+
+  --c-white:         #FFFFFF;
+  --c-off-white:     #FAFAF8;
+  --c-warm-white:    #F7F5F1;
+
+  --c-neutral-900:   #1A1A1A;
+  --c-neutral-800:   #2D2D2D;
+  --c-neutral-700:   #404040;
+  --c-neutral-600:   #525252;
+  --c-neutral-500:   #737373;
+  --c-neutral-400:   #A3A3A3;
+  --c-neutral-300:   #D4D4D4;
+  --c-neutral-200:   #E5E5E5;
+  --c-neutral-100:   #F5F5F5;
+  --c-neutral-50:    #FAFAFA;
+
+  --c-success:       #2D6A4F;
+  --c-success-soft:  #D8F3DC;
+  --c-error:         #9B2335;
+  --c-error-soft:    #FFE8EC;
+  --c-warning:       #92400E;
+  --c-warning-soft:  #FEF3C7;
+
+  /* Background */
+  --bg-light:        #FAFAF8;
+  --bg-dark:         #0A0A0A;
+  --bg-card:         #FFFFFF;
+  --bg-card-dark:    #171717;
+
+  /* Typography Scale */
+  --font-primary:    'DM Sans', 'Inter', sans-serif;
+  --font-mono:       'Inter', monospace;
+
+  --text-display:    clamp(28px, 8vw, 36px);
+  --text-h1:         clamp(22px, 6vw, 28px);
+  --text-h2:         clamp(18px, 5vw, 22px);
+  --text-h3:         clamp(16px, 4vw, 18px);
+  --text-subhead:    15px;
+  --text-body:       14px;
+  --text-body-sm:    13px;
+  --text-caption:    12px;
+  --text-label:      11px;
+  --text-btn:        15px;
+  --text-currency:   clamp(28px, 9vw, 40px);
+  --text-currency-sm: clamp(18px, 5vw, 22px);
+
+  /* Spacing */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-7:  28px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* Radius */
+  --r-xs:  4px;
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  24px;
+  --r-2xl: 32px;
+  --r-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.12);
+  --shadow-xl:  0 16px 48px rgba(0,0,0,0.15);
+  --shadow-primary: 0 8px 24px rgba(200,169,120,0.30);
+  --shadow-primary-sm: 0 4px 12px rgba(200,169,120,0.20);
+
+  /* Borders */
+  --border-light:   1px solid rgba(0,0,0,0.06);
+  --border-medium:  1px solid rgba(0,0,0,0.10);
+  --border-strong:  1px solid rgba(0,0,0,0.18);
+  --border-primary: 1px solid rgba(200,169,120,0.40);
+  --border-dark:    1px solid rgba(255,255,255,0.10);
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:    150ms;
+  --dur-base:    250ms;
+  --dur-slow:    400ms;
+  --dur-reveal:  600ms;
+
+  /* Touch Targets */
+  --touch-min:  44px;
+  --touch-lg:   52px;
+  --touch-xl:   56px;
+
+  /* Icon Sizes */
+  --icon-xs:   14px;
+  --icon-sm:   16px;
+  --icon-md:   20px;
+  --icon-lg:   24px;
+  --icon-xl:   32px;
+  --icon-2xl:  48px;
+}
+
+/* ─── RESET ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-primary);
+  background: #0F0F0F;
+  overscroll-behavior: none;
+}
+
+/* ─── APP SHELL ─────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 0;
+  background: #0F0F0F;
+}
+
+/* Navigation Header for Demo */
+.demo-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(15,15,15,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 12px 16px;
+}
+
+.demo-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.demo-nav-inner::-webkit-scrollbar { display: none; }
+
+.demo-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.screen-nav-btn {
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.60);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.screen-nav-btn:hover {
+  background: rgba(200,169,120,0.15);
+  border-color: rgba(200,169,120,0.40);
+  color: var(--c-primary);
+}
+
+.screen-nav-btn.active {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: var(--c-black);
+  font-weight: 600;
+}
+
+/* ─── PHONE FRAME ───────────────────────────────────────────── */
+.device-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 80px 20px 40px;
+}
+
+.phone-frame {
+  width: 390px;
+  min-height: 844px;
+  background: var(--bg-light);
+  border-radius: 48px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 32px 80px rgba(0,0,0,0.60),
+    0 0 120px rgba(200,169,120,0.06);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px 0;
+  height: 50px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.status-bar.dark {
+  background: transparent;
+}
+
+.status-bar.light {
+  background: transparent;
+}
+
+.status-time {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.status-bar.dark .status-time { color: var(--c-white); }
+.status-bar.light .status-time { color: var(--c-black); }
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Screen Container */
+.screen {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCREEN 01 — SPLASH
+   ═══════════════════════════════════════════════════════════════ */
+.screen-splash {
+  background: var(--c-black);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-bg-element {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(200,169,120,0.06) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.splash-bg-line {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(200,169,120,0.05);
+  pointer-events: none;
+}
+
+.splash-bg-line:nth-child(2) {
+  width: 300px; height: 300px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseRing 3s ease-in-out infinite;
+}
+.splash-bg-line:nth-child(3) {
+  width: 450px; height: 450px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseRing 3s ease-in-out infinite 0.8s;
+}
+.splash-bg-line:nth-child(4) {
+  width: 580px; height: 580px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseRing 3s ease-in-out infinite 1.6s;
+}
+
+@keyframes pulseRing {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.06; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-6);
+  animation: splashReveal 1s var(--ease-out) both;
+  z-index: 1;
+}
+
+@keyframes splashReveal {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Himo Monogram */
+.himo-monogram {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  animation: monogramReveal 1.2s var(--ease-out) 0.2s both;
+}
+
+@keyframes monogramReveal {
+  0% { opacity: 0; transform: scale(0.7) rotate(-10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.himo-monogram svg {
+  width: 100%;
+  height: 100%;
+}
+
+.himo-wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: splashReveal 1s var(--ease-out) 0.5s both;
+}
+
+.himo-wordmark-text {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  font-family: var(--font-primary);
+}
+
+.himo-wordmark-sub {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-primary);
+}
+
+.splash-init {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  animation: splashReveal 1s var(--ease-out) 1.2s both;
+  margin-top: var(--sp-8);
+}
+
+.splash-init-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.splash-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(200,169,120,0.3);
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.splash-dot:nth-child(2) { animation-delay: 0.2s; }
+.splash-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 100% { background: rgba(200,169,120,0.2); transform: scale(1); }
+  50% { background: var(--c-primary); transform: scale(1.3); }
+}
+
+.splash-init-text {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.20);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCREEN 02 — CAMPAIGN
+   ═══════════════════════════════════════════════════════════════ */
+.screen-campaign {
+  background: var(--c-black);
+  position: relative;
+  overflow: hidden;
+}
+
+.campaign-visual {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campaign-artwork {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+/* Campaign Geometric Art */
+.campaign-geo-bg {
+  position: absolute;
+  inset: 0;
+  background: #0A0A0A;
+  overflow: hidden;
+}
+
+.campaign-geo-circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.campaign-arc {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.campaign-label-top {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.campaign-badge {
+  background: var(--c-primary);
+  color: var(--c-black);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: var(--r-full);
+}
+
+.campaign-skip-btn {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.70);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-primary);
+  padding: 8px 14px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.campaign-skip-btn:hover,
+.campaign-skip-btn:active {
+  background: rgba(255,255,255,0.15);
+  color: var(--c-white);
+}
+
+.campaign-visual-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 32px 0;
+  z-index: 5;
+}
+
+.campaign-partner-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--sp-5);
+}
+
+.campaign-x {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.25);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.campaign-amount-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.campaign-amount-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.40);
+}
+
+.campaign-amount-value {
+  font-size: clamp(40px, 12vw, 56px);
+  font-weight: 800;
+  color: var(--c-white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.campaign-amount-currency {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--c-primary);
+  letter-spacing: 0.05em;
+}
+
+.campaign-amount-detail {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* Campaign Bottom Sheet */
+.campaign-sheet {
+  padding: 28px var(--sp-6) 36px;
+  background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0.97) 100%);
+  flex-shrink: 0;
+  z-index: 10;
+  position: relative;
+}
+
+.campaign-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--c-white);
+  line-height: 1.25;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.campaign-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.50);
+  line-height: 1.55;
+  margin-bottom: var(--sp-6);
+}
+
+.campaign-dots {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: var(--sp-5);
+}
+
+.campaign-dot-indicator {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.15);
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.campaign-dot-indicator.active {
+  width: 32px;
+  background: var(--c-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED LIGHT SCREEN BASE
+   ═══════════════════════════════════════════════════════════════ */
+.screen-light {
+  background: var(--bg-light);
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.screen-light::-webkit-scrollbar { display: none; }
+
+.screen-header {
+  padding: var(--sp-4) var(--sp-6) var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-shrink: 0;
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: var(--c-white);
+  border: var(--border-light);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.back-btn:hover, .back-btn:active {
+  background: var(--c-neutral-100);
+  transform: scale(0.96);
+}
+
+.screen-body {
+  padding: 0 var(--sp-6) var(--sp-8);
+  flex: 1;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────── */
+.text-display {
+  font-size: var(--text-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--c-black);
+}
+
+.text-h1 {
+  font-size: var(--text-h1);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--c-black);
+}
+
+.text-h2 {
+  font-size: var(--text-h2);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--c-black);
+}
+
+.text-h3 {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  color: var(--c-black);
+}
+
+.text-subhead {
+  font-size: var(--text-subhead);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--c-neutral-600);
+}
+
+.text-body {
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--c-neutral-600);
+}
+
+.text-body-sm {
+  font-size: var(--text-body-sm);
+  line-height: 1.5;
+  color: var(--c-neutral-500);
+}
+
+.text-caption {
+  font-size: var(--text-caption);
+  line-height: 1.4;
+  color: var(--c-neutral-400);
+}
+
+.text-label {
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-neutral-400);
+}
+
+.text-currency {
+  font-size: var(--text-currency);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--c-black);
+}
+
+.text-currency-sm {
+  font-size: var(--text-currency-sm);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--c-black);
+}
+
+.mt-1 { margin-top: var(--sp-1); }
+.mt-2 { margin-top: var(--sp-2); }
+.mt-3 { margin-top: var(--sp-3); }
+.mt-4 { margin-top: var(--sp-4); }
+.mt-5 { margin-top: var(--sp-5); }
+.mt-6 { margin-top: var(--sp-6); }
+.mt-8 { margin-top: var(--sp-8); }
+.mt-10 { margin-top: var(--sp-10); }
+
+.mb-1 { margin-bottom: var(--sp-1); }
+.mb-2 { margin-bottom: var(--sp-2); }
+.mb-3 { margin-bottom: var(--sp-3); }
+.mb-4 { margin-bottom: var(--sp-4); }
+.mb-5 { margin-bottom: var(--sp-5); }
+.mb-6 { margin-bottom: var(--sp-6); }
+.mb-8 { margin-bottom: var(--sp-8); }
+
+/* ─── BUTTONS ────────────────────────────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--touch-xl);
+  padding: 0 var(--sp-6);
+  border-radius: var(--r-lg);
+  font-family: var(--font-primary);
+  font-size: var(--text-btn);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all var(--dur-fast) var(--ease-out);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.btn:active::after {
+  background: rgba(0,0,0,0.08);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Primary Button */
+.btn-primary {
+  background: var(--c-primary);
+  color: var(--c-black);
+  box-shadow: var(--shadow-primary-sm);
+}
+
+.btn-primary:hover {
+  background: var(--c-primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.98) translateY(0);
+  box-shadow: none;
+}
+
+/* Primary Dark Button */
+.btn-primary-dark {
+  background: var(--c-black);
+  color: var(--c-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary-dark:hover {
+  background: var(--c-neutral-800);
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--c-neutral-600);
+  border: var(--border-medium);
+}
+
+.btn-ghost:hover {
+  background: var(--c-neutral-100);
+  color: var(--c-black);
+}
+
+/* Text Button */
+.btn-text {
+  background: transparent;
+  color: var(--c-primary-dark);
+  font-size: var(--text-body);
+  min-height: auto;
+  padding: var(--sp-2) 0;
+  width: auto;
+}
+
+.btn-text:hover {
+  color: var(--c-primary);
+}
+
+/* Disabled state */
+.btn:disabled, .btn.disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── INPUTS ─────────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-neutral-700);
+  letter-spacing: 0.02em;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--c-neutral-200);
+  background: var(--c-white);
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--c-black);
+  outline: none;
+  transition: all var(--dur-fast) var(--ease-out);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: var(--c-neutral-400);
+  font-weight: 400;
+}
+
+.input:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(200,169,120,0.12);
+}
+
+.input.error {
+  border-color: #D64545;
+  box-shadow: 0 0 0 3px rgba(214,69,69,0.10);
+}
+
+.input.success {
+  border-color: #2D6A4F;
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.10);
+}
+
+.input-error-msg {
+  font-size: 12px;
+  color: #D64545;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* Phone Input */
+.phone-input-group {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.country-code-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0 var(--sp-3);
+  min-width: 84px;
+  min-height: 52px;
+  background: var(--c-white);
+  border: 1.5px solid var(--c-neutral-200);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--c-black);
+  transition: all var(--dur-fast) var(--ease-out);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.country-code-btn:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+.phone-input {
+  flex: 1;
+}
+
+/* ─── OTP INPUT ──────────────────────────────────────────────── */
+.otp-group {
+  display: flex;
+  gap: var(--sp-2);
+  justify-content: center;
+}
+
+.otp-cell {
+  width: 48px;
+  height: 56px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--c-neutral-200);
+  background: var(--c-white);
+  font-family: var(--font-primary);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-black);
+  text-align: center;
+  outline: none;
+  transition: all var(--dur-fast) var(--ease-out);
+  caret-color: var(--c-primary);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.otp-cell:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(200,169,120,0.14);
+  transform: scale(1.03);
+}
+
+.otp-cell.filled {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+  color: var(--c-primary-dark);
+}
+
+.otp-cell.error {
+  border-color: #D64545;
+  background: #FFF5F5;
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ─── PASSCODE KEYPAD ────────────────────────────────────────── */
+.passcode-dots {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.passcode-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--c-neutral-300);
+  background: transparent;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+
+.passcode-dot.filled {
+  background: var(--c-black);
+  border-color: var(--c-black);
+  transform: scale(1.1);
+}
+
+.passcode-dot.filled.animated {
+  animation: dotFill 0.2s var(--ease-spring) both;
+}
+
+@keyframes dotFill {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1.1); }
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-4) 0;
+}
+
+.keypad-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 68px;
+  border-radius: var(--r-xl);
+  background: var(--c-white);
+  border: var(--border-light);
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: all var(--dur-fast) var(--ease-out);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.keypad-btn:hover {
+  background: var(--c-neutral-50);
+}
+
+.keypad-btn:active {
+  background: var(--c-primary-soft);
+  border-color: rgba(200,169,120,0.30);
+  transform: scale(0.94);
+}
+
+.keypad-btn.ghost {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.keypad-btn.ghost:hover {
+  background: var(--c-neutral-100);
+}
+
+.keypad-num {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--c-black);
+  line-height: 1;
+}
+
+.keypad-sub {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-neutral-400);
+  margin-top: 2px;
+}
+
+/* ─── STEP INDICATOR ─────────────────────────────────────────── */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1.5px solid var(--c-neutral-200);
+  background: var(--c-white);
+  color: var(--c-neutral-400);
+  transition: all var(--dur-base) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.step-circle.active {
+  border-color: var(--c-primary);
+  background: var(--c-primary);
+  color: var(--c-black);
+}
+
+.step-circle.done {
+  border-color: var(--c-black);
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.step-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-neutral-400);
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.step-label.active { color: var(--c-primary-dark); font-weight: 600; }
+.step-label.done { color: var(--c-black); }
+
+.step-line {
+  flex: 1;
+  height: 1.5px;
+  background: var(--c-neutral-200);
+  min-width: var(--sp-4);
+  margin: 0 var(--sp-2);
+  transition: background var(--dur-base) var(--ease-out);
+}
+
+.step-line.done {
+  background: var(--c-black);
+}
+
+/* ─── CARDS ──────────────────────────────────────────────────── */
+.card {
+  background: var(--c-white);
+  border-radius: var(--r-xl);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-sm);
+  border: var(--border-light);
+}
+
+.card-dark {
+  background: var(--c-soft-black);
+  border-radius: var(--r-xl);
+  padding: var(--sp-5);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─── UPLOAD COMPONENT ───────────────────────────────────────── */
+.upload-zone {
+  border: 1.5px dashed var(--c-neutral-300);
+  border-radius: var(--r-xl);
+  padding: var(--sp-8) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+  background: var(--c-off-white);
+  text-align: center;
+}
+
+.upload-zone:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+.upload-zone:active {
+  transform: scale(0.98);
+}
+
+.upload-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-xl);
+  background: var(--c-white);
+  box-shadow: var(--shadow-sm);
+  border: var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── TOAST ──────────────────────────────────────────────────── */
+.toast {
+  position: absolute;
+  top: 60px;
+  left: var(--sp-4);
+  right: var(--sp-4);
+  background: var(--c-soft-black);
+  border-radius: var(--r-lg);
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  box-shadow: var(--shadow-xl);
+  z-index: 100;
+  animation: toastIn 0.4s var(--ease-out) both;
+}
+
+@keyframes toastIn {
+  0% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toast-icon.success { background: rgba(45,106,79,0.25); }
+.toast-icon.error { background: rgba(214,69,69,0.25); }
+
+.toast-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-white);
+  line-height: 1.35;
+}
+
+/* ─── SUCCESS STATE ──────────────────────────────────────────── */
+.success-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-10) 0;
+}
+
+.success-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--c-primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: successPop 0.5s var(--ease-spring) both;
+}
+
+@keyframes successPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── SEPARATOR ──────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--c-neutral-100);
+  margin: var(--sp-5) 0;
+}
+
+.divider-text {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--c-neutral-400);
+  font-size: 12px;
+  font-weight: 500;
+  margin: var(--sp-5) 0;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--c-neutral-200);
+}
+
+/* ─── SELECT / DROPDOWN ──────────────────────────────────────── */
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--c-neutral-400);
+  pointer-events: none;
+}
+
+.select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+}
+
+/* ─── BOTTOM NAVIGATION ──────────────────────────────────────── */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  padding: 12px var(--sp-4) 28px;
+  background: var(--c-white);
+  border-top: var(--border-light);
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--sp-2) 0;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+  border-radius: var(--r-md);
+}
+
+.bottom-nav-item:active {
+  background: var(--c-neutral-100);
+  transform: scale(0.94);
+}
+
+.bottom-nav-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.bottom-nav-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--c-neutral-400);
+  letter-spacing: 0.02em;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.bottom-nav-item.active .bottom-nav-icon svg,
+.bottom-nav-item.active .bottom-nav-icon svg path,
+.bottom-nav-item.active .bottom-nav-icon svg rect,
+.bottom-nav-item.active .bottom-nav-icon svg circle {
+  fill: var(--c-primary);
+  stroke: none;
+}
+
+.bottom-nav-item.active .bottom-nav-label {
+  color: var(--c-primary);
+  font-weight: 600;
+}
+
+/* ─── KYC ILLUSTRATION ───────────────────────────────────────── */
+.kyc-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-5) 0;
+}
+
+.kyc-illus-wrap {
+  width: 140px;
+  height: 140px;
+  position: relative;
+}
+
+/* ─── RADIO / CHECKBOX ───────────────────────────────────────── */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--c-neutral-200);
+  background: var(--c-white);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.radio-option:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+.radio-option.selected {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--c-neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.radio-option.selected .radio-circle {
+  border-color: var(--c-primary-dark);
+  background: var(--c-primary);
+}
+
+.radio-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-black);
+  opacity: 0;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+
+.radio-option.selected .radio-inner {
+  opacity: 1;
+}
+
+.radio-label {
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--c-black);
+}
+
+/* ─── LOADING STATE ──────────────────────────────────────────── */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0,0,0,0.15);
+  border-top-color: var(--c-black);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.loading-spinner.light {
+  border-color: rgba(255,255,255,0.25);
+  border-top-color: var(--c-white);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── VERIFICATION PROGRESS ──────────────────────────────────── */
+.verify-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.verify-step-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--c-white);
+  border: var(--border-light);
+}
+
+.verify-step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.verify-step-icon.pending {
+  background: var(--c-neutral-100);
+}
+
+.verify-step-icon.processing {
+  background: rgba(200,169,120,0.15);
+}
+
+.verify-step-icon.done {
+  background: rgba(45,106,79,0.12);
+}
+
+.verify-step-text {
+  flex: 1;
+}
+
+/* ─── HOME SCREEN ────────────────────────────────────────────── */
+.home-screen {
+  background: var(--bg-light);
+}
+
+.home-top {
+  background: var(--c-black);
+  padding: 0 var(--sp-6) var(--sp-8);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-top-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% -10%, rgba(200,169,120,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.home-greeting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--sp-4);
+  padding-bottom: var(--sp-5);
+}
+
+.home-greeting {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.home-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: var(--c-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-black);
+  flex-shrink: 0;
+}
+
+.home-greeting-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.home-greeting-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.40);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.home-greeting-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-white);
+  letter-spacing: -0.01em;
+}
+
+.home-notif-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-md);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.home-notif-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  border: 1.5px solid var(--c-black);
+}
+
+.home-balance-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--r-2xl);
+  padding: var(--sp-5) var(--sp-6);
+  backdrop-filter: blur(10px);
+}
+
+.home-balance-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.40);
+  margin-bottom: var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.home-balance-amount {
+  font-size: clamp(28px, 8vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--c-white);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-1);
+}
+
+.home-balance-currency {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-primary);
+  padding-top: 6px;
+  letter-spacing: 0.04em;
+}
+
+.home-balance-change {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-top: var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-balance-change.up {
+  color: rgba(74,196,136,0.80);
+}
+
+.home-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--c-white);
+  border-top: var(--border-light);
+}
+
+.home-action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.home-action-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-lg);
+  background: var(--c-off-white);
+  border: var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.home-action-item:active .home-action-icon {
+  background: var(--c-primary-soft);
+  border-color: rgba(200,169,120,0.3);
+  transform: scale(0.94);
+}
+
+.home-action-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--c-neutral-500);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.home-section {
+  padding: var(--sp-5) var(--sp-6);
+}
+
+.home-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4);
+}
+
+.home-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-black);
+  letter-spacing: -0.01em;
+}
+
+.home-section-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--c-primary-dark);
+  cursor: pointer;
+}
+
+/* Promo Card */
+.promo-card {
+  border-radius: var(--r-xl);
+  background: var(--c-soft-black);
+  overflow: hidden;
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  padding: var(--sp-5);
+}
+
+.promo-card-bg {
+  position: absolute;
+  right: -20px;
+  top: -30px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(200,169,120,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.promo-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.promo-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-primary);
+}
+
+.promo-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-white);
+  letter-spacing: -0.01em;
+}
+
+.promo-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.40);
+}
+
+.promo-cta {
+  position: absolute;
+  bottom: var(--sp-4);
+  right: var(--sp-4);
+  background: var(--c-primary);
+  color: var(--c-black);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-primary);
+}
+
+/* Transaction Item */
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: var(--border-light);
+}
+
+.tx-item:last-child { border-bottom: none; }
+
+.tx-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 17px;
+}
+
+.tx-info { flex: 1; min-width: 0; }
+
+.tx-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tx-date {
+  font-size: 11px;
+  color: var(--c-neutral-400);
+  margin-top: 2px;
+}
+
+.tx-amount {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+.tx-amount.debit { color: var(--c-black); }
+.tx-amount.credit { color: #2D6A4F; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SCREEN-SPECIFIC STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Screen headings block */
+.screen-heading-block {
+  padding: var(--sp-6) var(--sp-6) 0;
+}
+
+/* Login screens branding */
+.auth-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--sp-6);
+}
+
+.auth-logo-mark {
+  width: 32px;
+  height: 32px;
+}
+
+.auth-logo-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-black);
+}
+
+/* Resend + countdown */
+.otp-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.countdown-text {
+  font-size: 13px;
+  color: var(--c-neutral-500);
+}
+
+.countdown-time {
+  font-weight: 700;
+  color: var(--c-black);
+}
+
+.resend-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-primary-dark);
+  cursor: pointer;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--r-sm);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.resend-link:hover { background: var(--c-primary-soft); }
+.resend-link.disabled { color: var(--c-neutral-400); pointer-events: none; }
+
+/* Change phone link */
+.change-phone-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--c-neutral-500);
+  cursor: pointer;
+  margin-top: var(--sp-3);
+}
+
+.change-phone-link:hover { color: var(--c-black); }
+
+/* Subtle link text */
+.subtle-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--c-neutral-500);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.subtle-link a, .subtle-link .link {
+  color: var(--c-primary-dark);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Security note */
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-primary-soft);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(200,169,120,0.20);
+}
+
+.security-note-text {
+  font-size: 12px;
+  color: var(--c-primary-deep);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+/* Biometric hint */
+.biometric-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
+  padding: var(--sp-4);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  border: var(--border-light);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.biometric-hint:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+/* Document ID type selector */
+.id-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-2);
+}
+
+.id-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  border: 1.5px solid var(--c-neutral-200);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+  text-align: center;
+}
+
+.id-type-card:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+.id-type-card.selected {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+}
+
+.id-type-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: var(--c-off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.id-type-card.selected .id-type-icon {
+  background: rgba(200,169,120,0.25);
+}
+
+.id-type-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-neutral-700);
+}
+
+.id-type-card.selected .id-type-label { color: var(--c-primary-dark); }
+
+/* Selfie frame */
+.selfie-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--r-2xl);
+  background: var(--c-neutral-100);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selfie-frame-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selfie-oval {
+  width: 65%;
+  height: 80%;
+  border: 2.5px dashed var(--c-primary);
+  border-radius: 50%;
+  position: relative;
+  animation: ovalPulse 2s ease-in-out infinite;
+}
+
+@keyframes ovalPulse {
+  0%, 100% { border-color: rgba(200,169,120,0.4); }
+  50% { border-color: var(--c-primary); }
+}
+
+.selfie-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--c-primary);
+  border-style: solid;
+}
+
+.selfie-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.selfie-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
+.selfie-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
+.selfie-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+/* ─── FORGOT PASSCODE ────────────────────────────────────────── */
+.forgot-row {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-4);
+}
+
+.forgot-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-neutral-500);
+  cursor: pointer;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.forgot-link:hover {
+  color: var(--c-black);
+  background: var(--c-neutral-100);
+}
+
+/* ─── TERMS ──────────────────────────────────────────────────── */
+.terms-text {
+  font-size: 11px;
+  color: var(--c-neutral-400);
+  text-align: center;
+  line-height: 1.55;
+}
+
+.terms-text a { color: var(--c-primary-dark); text-decoration: none; font-weight: 500; }
+
+/* ─── UTILITIES ──────────────────────────────────────────────── */
+.text-center { text-align: center; }
+.text-primary { color: var(--c-primary-dark); }
+.text-muted { color: var(--c-neutral-500); }
+.text-success { color: #2D6A4F; }
+.text-error { color: #D64545; }
+
+.w-full { width: 100%; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: var(--sp-2); }
+.gap-3 { gap: var(--sp-3); }
+.gap-4 { gap: var(--sp-4); }
+
+/* ─── SCREEN SCROLL WRAPPER ──────────────────────────────────── */
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scroll-area::-webkit-scrollbar { display: none; }
+
+/* Bottom padding for scroll */
+.pb-nav { padding-bottom: 100px; }
+.pb-btn { padding-bottom: var(--sp-8); }
+
+/* ─── PHONE FRAME DARK BACKGROUND FIX ───────────────────────── */
+.phone-frame.dark-bg {
+  background: var(--c-black);
+}
+
+/* ─── INLINE MONOGRAM ────────────────────────────────────────── */
+.inline-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── STICKY BUTTON AREA ─────────────────────────────────────── */
+.sticky-btn-area {
+  padding: var(--sp-4) var(--sp-6) var(--sp-8);
+  flex-shrink: 0;
+  background: var(--bg-light);
+}
+
+.sticky-btn-area.white-bg {
+  background: var(--c-white);
+}
+
+/* Input with icon */
+.input-icon-wrap {
+  position: relative;
+}
+
+.input-icon-right {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-neutral-400);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input-with-icon-right {
+  padding-right: 44px;
+}
+
+/* ─── RESPONSIVE ADJUSTMENTS ─────────────────────────────────── */
+@media (max-width: 430px) {
+  .phone-frame {
+    width: 100vw;
+    min-height: 100svh;
+    border-radius: 0;
+  }
+  .device-container {
+    padding: 60px 0 0;
+    align-items: flex-start;
+  }
+  .demo-nav { position: fixed; }
+}
+
+@media (min-width: 760px) {
+  .demo-nav-inner {
+    justify-content: center;
+  }
+}
+
+/* Loading overlay for splash transition */
+.fade-in {
+  animation: fadeIn var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Screen-level transition */
+.screen-enter {
+  animation: screenEnter 0.35s var(--ease-out) both;
+}
+
+@keyframes screenEnter {
+  0% { opacity: 0; transform: translateX(12px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ID type doc upload orientation */
+.doc-frame {
+  width: 100%;
+  height: 160px;
+  border-radius: var(--r-xl);
+  background: linear-gradient(145deg, #1A1A1A, #0A0A0A);
+  border: 1.5px dashed rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-frame::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: var(--r-lg);
+  border: 1px dashed rgba(200,169,120,0.20);
+  pointer-events: none;
+}
+
+.doc-frame:hover {
+  border-color: rgba(200,169,120,0.40);
+}
+
+.doc-frame-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.50);
+  text-align: center;
+  line-height: 1.45;
+}
+
+.doc-frame-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: rgba(200,169,120,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Home screen scroller */
+.home-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: var(--bg-light);
+}
+
+.home-scroll::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   MINI ILLUSTRATION COMPONENTS
+   ═══════════════════════════════════════════════════════════════ */
+.illus-welcome {
+  display: block;
+  margin: var(--sp-6) auto;
+}
+
+/* Himo geometric pattern */
+.geo-pattern {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.035;
+}
+
+/* Progress bar (upload) */
+.progress-bar-wrap {
+  height: 3px;
+  background: var(--c-neutral-100);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--c-primary);
+  border-radius: var(--r-full);
+  transition: width 0.4s var(--ease-out);
+}
+
+/* Input date */
+.input-date {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23A3A3A3' viewBox='0 0 16 16'%3E%3Cpath d='M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z'/%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* Campaign countdown */
+.campaign-timer {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.campaign-timer-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--r-sm);
+  padding: 4px 8px;
+  min-width: 38px;
+}
+
+.campaign-timer-num {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-white);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.campaign-timer-label {
+  font-size: 9px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.campaign-timer-sep {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: 8px;
+}
+
+/* Screen active transitions */
+.screen { transition: opacity 0.25s ease; }
+</style>
+</head>
+
+<body>
+
+<!-- ───────────────────────────────────────────────────────────── -->
+<!--  DEMO NAVIGATION                                             -->
+<!-- ───────────────────────────────────────────────────────────── -->
+<div class="app-shell">
+
+  <nav class="demo-nav" role="navigation" aria-label="Screen navigation">
+    <div class="demo-nav-inner">
+      <span class="demo-nav-label">Himo Pay</span>
+      <button class="screen-nav-btn active" onclick="showScreen('splash')" id="nav-splash">Splash</button>
+      <button class="screen-nav-btn" onclick="showScreen('campaign')" id="nav-campaign">Campaign</button>
+      <button class="screen-nav-btn" onclick="showScreen('login-phone')" id="nav-login-phone">Login</button>
+      <button class="screen-nav-btn" onclick="showScreen('login-otp')" id="nav-login-otp">Login OTP</button>
+      <button class="screen-nav-btn" onclick="showScreen('login-passcode')" id="nav-login-passcode">Passcode</button>
+      <button class="screen-nav-btn" onclick="showScreen('signup-phone')" id="nav-signup-phone">Sign Up</button>
+      <button class="screen-nav-btn" onclick="showScreen('kyc-personal')" id="nav-kyc-personal">KYC Personal</button>
+      <button class="screen-nav-btn" onclick="showScreen('kyc-identity')" id="nav-kyc-identity">KYC Identity</button>
+      <button class="screen-nav-btn" onclick="showScreen('kyc-verify')" id="nav-kyc-verify">KYC Verify</button>
+      <button class="screen-nav-btn" onclick="showScreen('signup-otp')" id="nav-signup-otp">Sign Up OTP</button>
+      <button class="screen-nav-btn" onclick="showScreen('create-passcode')" id="nav-create-passcode">Create PIN</button>
+      <button class="screen-nav-btn" onclick="showScreen('home')" id="nav-home">Home</button>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!--  PHONE FRAME                                               -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <div class="device-container">
+    <div class="phone-frame" id="phone-frame">
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 01 — SPLASH
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen screen-splash active" id="screen-splash" role="main" aria-label="Splash screen">
+        <div class="splash-bg-element"></div>
+        <div class="splash-bg-line"></div>
+        <div class="splash-bg-line"></div>
+        <div class="splash-bg-line"></div>
+
+        <div class="splash-content">
+          <!-- Himo Monogram -->
+          <div class="himo-monogram" aria-label="Himo Pay logo">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer ring segment -->
+              <circle cx="40" cy="40" r="38" stroke="rgba(200,169,120,0.15)" stroke-width="1"/>
+              <!-- H geometric mark -->
+              <rect x="14" y="20" width="8" height="40" rx="3" fill="#C8A978"/>
+              <rect x="36" y="20" width="8" height="40" rx="3" fill="white" opacity="0.9"/>
+              <rect x="14" y="35" width="30" height="10" rx="3" fill="white" opacity="0.6"/>
+              <!-- P dot accent -->
+              <circle cx="56" cy="28" r="10" fill="rgba(200,169,120,0.18)" stroke="rgba(200,169,120,0.4)" stroke-width="1.5"/>
+              <circle cx="56" cy="28" r="5" fill="#C8A978"/>
+              <!-- Subtle line detail -->
+              <line x1="58" y1="38" x2="58" y2="58" stroke="rgba(255,255,255,0.20)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Wordmark -->
+          <div class="himo-wordmark">
+            <div class="himo-wordmark-text">HIMO PAY</div>
+            <div class="himo-wordmark-sub">Digital Wallet</div>
+          </div>
+
+          <!-- Initialization -->
+          <div class="splash-init">
+            <div class="splash-init-dots">
+              <div class="splash-dot"></div>
+              <div class="splash-dot"></div>
+              <div class="splash-dot"></div>
+            </div>
+            <div class="splash-init-text">Initializing secure environment</div>
+          </div>
+        </div>
+
+        <!-- Auto-progress splash -->
+        <script>
+          setTimeout(() => {
+            if (document.getElementById('screen-splash').classList.contains('active')) {
+              // Do nothing — user controls via nav
+            }
+          }, 3000);
+        </script>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 02 — CAMPAIGN
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen screen-campaign" id="screen-campaign" role="main" aria-label="Campaign screen">
+        <!-- Status bar dark -->
+        <div class="status-bar dark">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+              <rect x="0" y="3" width="3" height="9" rx="1" fill="white" opacity="0.5"/>
+              <rect x="4.5" y="2" width="3" height="10" rx="1" fill="white" opacity="0.7"/>
+              <rect x="9" y="0" width="3" height="12" rx="1" fill="white" opacity="0.9"/>
+              <rect x="13.5" y="0" width="3" height="12" rx="1" fill="white"/>
+            </svg>
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+              <path d="M8 2.5C10.5 2.5 12.7 3.6 14.2 5.4L15.5 4.1C13.6 2 11 0.8 8 0.8C5 0.8 2.4 2 0.5 4.1L1.8 5.4C3.3 3.6 5.5 2.5 8 2.5Z" fill="white" opacity="0.5"/>
+              <path d="M8 5.5C9.8 5.5 11.4 6.3 12.5 7.6L13.8 6.3C12.3 4.7 10.3 3.8 8 3.8C5.7 3.8 3.7 4.7 2.2 6.3L3.5 7.6C4.6 6.3 6.2 5.5 8 5.5Z" fill="white" opacity="0.75"/>
+              <circle cx="8" cy="11" r="1.8" fill="white"/>
+            </svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+              <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/>
+              <rect x="2" y="2" width="17" height="8" rx="2" fill="white" opacity="0.9"/>
+              <path d="M23 4V8C23.8 7.5 24.5 6.8 24.5 6C24.5 5.2 23.8 4.5 23 4Z" fill="white" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Campaign visual -->
+        <div class="campaign-visual">
+          <!-- Geometric campaign artwork -->
+          <div class="campaign-geo-bg">
+            <img src="campaign_photo_cafe.jpg" alt="Campaign Cafe" style="position:absolute; width:100%; height:100%; object-fit:cover; top:0; left:0; z-index:0; opacity:0.85;">
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.2) 100%); z-index:1;"></div>
+            
+            <!-- Central geometric illustration -->
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);display:flex;flex-direction:column;align-items:center;gap:16px;z-index:2;">
+              <!-- Partner brand marks -->
+              <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+                <!-- Himo mark -->
+                <div style="width:44px;height:44px;background:#C8A978;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(200,169,120,0.35);">
+                  <svg width="26" height="26" viewBox="0 0 80 80" fill="none">
+                    <rect x="10" y="16" width="10" height="48" rx="4" fill="white"/>
+                    <rect x="40" y="16" width="10" height="48" rx="4" fill="white" opacity="0.85"/>
+                    <rect x="10" y="32" width="40" height="12" rx="4" fill="white" opacity="0.6"/>
+                    <circle cx="65" cy="24" r="8" fill="white" opacity="0.5"/>
+                    <circle cx="65" cy="24" r="4" fill="white"/>
+                  </svg>
+                </div>
+                <!-- X separator -->
+                <div style="color:rgba(255,255,255,0.25);font-size:20px;font-weight:300;">×</div>
+                <!-- Partner mark — abstract geometric -->
+                <div style="width:44px;height:44px;background:#1A1A1A;border:1px solid rgba(255,255,255,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <rect x="2" y="2" width="8" height="8" rx="2" fill="rgba(200,169,120,0.8)"/>
+                    <rect x="12" y="2" width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)"/>
+                    <rect x="2" y="12" width="8" height="8" rx="2" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="12" y="12" width="8" height="8" rx="2" fill="rgba(200,169,120,0.5)"/>
+                  </svg>
+                </div>
+              </div>
+              <!-- Campaign headline number -->
+              <div style="text-align:center;">
+                <div style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px;">Cashback Campaign</div>
+                <div style="font-size:72px;font-weight:900;color:white;letter-spacing:-0.04em;line-height:1;">10%</div>
+                <div style="font-size:16px;font-weight:600;color:var(--c-primary);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;">Cashback</div>
+              </div>
+              <!-- Subtle geo lines -->
+              <svg width="200" height="40" viewBox="0 0 200 40" fill="none" style="opacity:0.15;margin-top:8px;">
+                <line x1="0" y1="20" x2="70" y2="20" stroke="white" stroke-width="1"/>
+                <circle cx="100" cy="20" r="8" stroke="white" stroke-width="1"/>
+                <line x1="130" y1="20" x2="200" y2="20" stroke="white" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Top badge + skip -->
+          <div class="campaign-label-top">
+            <div class="campaign-badge">Limited Offer</div>
+            <button class="campaign-skip-btn" onclick="showScreen('login-phone')" aria-label="Skip campaign">Skip →</button>
+          </div>
+        </div>
+
+        <!-- Campaign sheet -->
+        <div class="campaign-sheet">
+          <!-- Dot indicators -->
+          <div class="campaign-dots">
+            <div class="campaign-dot-indicator active"></div>
+            <div class="campaign-dot-indicator"></div>
+            <div class="campaign-dot-indicator"></div>
+          </div>
+
+          <div class="campaign-title">Pay with Himo,<br>Earn More.</div>
+          <div class="campaign-desc">Get 10% cashback on every QR payment at Wave Money partner locations — valid through October 2026.</div>
+
+          <!-- Timer -->
+          <div class="campaign-timer" style="margin-bottom:20px;">
+            <div class="campaign-timer-block">
+              <div class="campaign-timer-num" id="camp-days">18</div>
+              <div class="campaign-timer-label">Days</div>
+            </div>
+            <div class="campaign-timer-sep">:</div>
+            <div class="campaign-timer-block">
+              <div class="campaign-timer-num" id="camp-hrs">06</div>
+              <div class="campaign-timer-label">Hrs</div>
+            </div>
+            <div class="campaign-timer-sep">:</div>
+            <div class="campaign-timer-block">
+              <div class="campaign-timer-num" id="camp-min">44</div>
+              <div class="campaign-timer-label">Min</div>
+            </div>
+            <div class="campaign-timer-sep">:</div>
+            <div class="campaign-timer-block">
+              <div class="campaign-timer-num" id="camp-sec">31</div>
+              <div class="campaign-timer-label">Sec</div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" onclick="showScreen('login-phone')" id="campaign-cta-btn">
+            Claim Offer
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 03 — LOGIN — PHONE NUMBER
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-login-phone" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-6) var(--sp-6) var(--sp-8);">
+            <!-- Logo -->
+            <div class="auth-logo-row">
+              <div class="auth-logo-mark">
+                <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+                  <rect width="32" height="32" rx="8" fill="#0A0A0A"/>
+                  <rect x="6" y="8" width="4" height="16" rx="1.5" fill="#C8A978"/>
+                  <rect x="14" y="8" width="4" height="16" rx="1.5" fill="white" opacity="0.9"/>
+                  <rect x="6" y="13" width="12" height="4" rx="1.5" fill="white" opacity="0.5"/>
+                  <circle cx="24" cy="11" r="4" fill="rgba(200,169,120,0.3)" stroke="#C8A978" stroke-width="1.5"/>
+                  <circle cx="24" cy="11" r="2" fill="#C8A978"/>
+                </svg>
+              </div>
+              <span class="auth-logo-name">Himo Pay</span>
+            </div>
+
+            <!-- Heading -->
+            <div class="mb-2">
+              <div class="text-h1">Welcome back.</div>
+            </div>
+            <div class="text-body text-muted mb-6" style="margin-bottom:var(--sp-8);">
+              Enter your phone number to continue.
+            </div>
+
+            <!-- Phone input -->
+            <div class="form-group mb-5" style="margin-bottom:var(--sp-5);">
+              <div class="form-label">Phone number</div>
+              <div class="phone-input-group">
+                <button class="country-code-btn" aria-label="Select country code">
+                  <span>🇲🇲</span>
+                  <span>+95</span>
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="opacity:0.4;"><path d="M1 1l4 4 4-4" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+                <input
+                  class="input phone-input"
+                  type="tel"
+                  id="login-phone-input"
+                  placeholder="9 XXX XXX XXX"
+                  inputmode="tel"
+                  maxlength="11"
+                  aria-label="Phone number"
+                >
+              </div>
+            </div>
+
+            <!-- Continue button -->
+            <button class="btn btn-primary-dark mb-6" onclick="showScreen('login-otp')" id="login-phone-btn" style="margin-bottom:var(--sp-5);">
+              Continue
+            </button>
+
+            <div class="divider-text">or</div>
+
+            <!-- Sign up link -->
+            <div class="subtle-link" style="margin-top:var(--sp-3);">
+              Don't have an account?&nbsp;
+              <span class="link" onclick="showScreen('signup-phone')">Sign up</span>
+            </div>
+
+            <!-- Terms -->
+            <div class="terms-text" style="margin-top:var(--sp-8);">
+              By continuing, you agree to our <a href="#">Terms of Service</a><br>and <a href="#">Privacy Policy</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 04 — LOGIN — OTP
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-login-otp" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="screen-header">
+          <div class="back-btn" onclick="showScreen('login-phone')" role="button" aria-label="Go back" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14L6 9l5-5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-3) var(--sp-6) var(--sp-8);">
+            <!-- Heading -->
+            <div class="mb-2">
+              <div class="text-h1">Verify your number.</div>
+            </div>
+            <div class="text-body text-muted mb-8" style="margin-bottom:var(--sp-8);">
+              We sent a 6-digit code to<br>
+              <strong style="color:var(--c-black);font-weight:600;">+95 9 456 789 012</strong>
+            </div>
+
+            <!-- OTP Cells -->
+            <div class="otp-group mb-6" style="margin-bottom:var(--sp-6);" id="login-otp-group">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="otp-0" autocomplete="one-time-code" aria-label="OTP digit 1">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="otp-1" aria-label="OTP digit 2">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="otp-2" aria-label="OTP digit 3">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="otp-3" aria-label="OTP digit 4">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="otp-4" aria-label="OTP digit 5">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="otp-5" aria-label="OTP digit 6">
+            </div>
+
+            <!-- Resend -->
+            <div class="otp-actions">
+              <div class="countdown-text">
+                Resend code in <span class="countdown-time" id="login-countdown">00:59</span>
+              </div>
+              <div class="resend-link disabled" id="login-resend" onclick="resetLoginCountdown()">Resend code</div>
+            </div>
+
+            <!-- Change number -->
+            <div class="change-phone-link" onclick="showScreen('login-phone')">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 7l6 6M1 7h12" stroke="#737373" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Change phone number
+            </div>
+
+            <!-- Verify CTA -->
+            <button class="btn btn-primary-dark" style="margin-top:var(--sp-8);" onclick="showScreen('login-passcode')" id="otp-verify-btn">
+              Verify
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 05 — LOGIN — PASSCODE
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-login-passcode" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="screen-header">
+          <div class="back-btn" onclick="showScreen('login-otp')" role="button" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14L6 9l5-5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div style="flex:1;display:flex;flex-direction:column;padding:var(--sp-3) var(--sp-6) var(--sp-8);">
+          <!-- Heading -->
+          <div class="text-center" style="margin-bottom:var(--sp-8);">
+            <!-- Mini monogram -->
+            <div style="width:52px;height:52px;background:var(--c-black);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-5);">
+              <svg width="30" height="30" viewBox="0 0 80 80" fill="none">
+                <rect x="10" y="16" width="10" height="48" rx="4" fill="#C8A978"/>
+                <rect x="40" y="16" width="10" height="48" rx="4" fill="white" opacity="0.9"/>
+                <rect x="10" y="32" width="40" height="12" rx="4" fill="white" opacity="0.5"/>
+                <circle cx="65" cy="24" r="8" fill="rgba(200,169,120,0.25)"/>
+                <circle cx="65" cy="24" r="4" fill="#C8A978"/>
+              </svg>
+            </div>
+            <div class="text-h2 mb-2" style="margin-bottom:8px;">Enter your passcode</div>
+            <div class="text-body text-muted">Keep your Himo account secure</div>
+          </div>
+
+          <!-- Passcode dots -->
+          <div class="passcode-dots mb-8" style="margin-bottom:var(--sp-8);" id="login-passcode-dots">
+            <div class="passcode-dot" id="lpc-0"></div>
+            <div class="passcode-dot" id="lpc-1"></div>
+            <div class="passcode-dot" id="lpc-2"></div>
+            <div class="passcode-dot" id="lpc-3"></div>
+            <div class="passcode-dot" id="lpc-4"></div>
+            <div class="passcode-dot" id="lpc-5"></div>
+          </div>
+
+          <!-- Keypad -->
+          <div class="keypad" id="login-keypad">
+            <div class="keypad-btn" onclick="keypadPress('login',1)"><span class="keypad-num">1</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',2)"><span class="keypad-num">2</span><span class="keypad-sub">ABC</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',3)"><span class="keypad-num">3</span><span class="keypad-sub">DEF</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',4)"><span class="keypad-num">4</span><span class="keypad-sub">GHI</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',5)"><span class="keypad-num">5</span><span class="keypad-sub">JKL</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',6)"><span class="keypad-num">6</span><span class="keypad-sub">MNO</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',7)"><span class="keypad-num">7</span><span class="keypad-sub">PQRS</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',8)"><span class="keypad-num">8</span><span class="keypad-sub">TUV</span></div>
+            <div class="keypad-btn" onclick="keypadPress('login',9)"><span class="keypad-num">9</span><span class="keypad-sub">WXYZ</span></div>
+            <div class="keypad-btn ghost" onclick="showBiometric()">
+              <!-- Fingerprint icon -->
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="opacity:0.55;">
+                <path d="M11 2C7.5 2 4.5 4.2 3.2 7.3" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M19 7.3C17.7 4.2 14.7 2 11 2" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M2 11C2 12.8 2.5 14.5 3.4 16" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M20 11C20 15.4 16.4 19 12 19" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M11 7C13.2 7 15 8.8 15 11C15 13.2 13.2 15 11 15" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="11" cy="11" r="2" fill="#0A0A0A" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="keypad-btn" onclick="keypadPress('login',0)"><span class="keypad-num">0</span></div>
+            <div class="keypad-btn ghost" onclick="keypadDelete('login')">
+              <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+                <path d="M8 1H20C20.6 1 21 1.4 21 2V14C21 14.6 20.6 15 20 15H8L1 8L8 1Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M14 5.5L10 10.5M10 5.5L14 10.5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Forgot passcode -->
+          <div class="forgot-row">
+            <div class="forgot-link">Forgot passcode?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 06 — SIGN UP — PHONE NUMBER
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-signup-phone" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-6) var(--sp-6) var(--sp-8);">
+            <!-- Logo -->
+            <div class="auth-logo-row">
+              <div class="auth-logo-mark">
+                <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+                  <rect width="32" height="32" rx="8" fill="#0A0A0A"/>
+                  <rect x="6" y="8" width="4" height="16" rx="1.5" fill="#C8A978"/>
+                  <rect x="14" y="8" width="4" height="16" rx="1.5" fill="white" opacity="0.9"/>
+                  <rect x="6" y="13" width="12" height="4" rx="1.5" fill="white" opacity="0.5"/>
+                  <circle cx="24" cy="11" r="4" fill="rgba(200,169,120,0.3)" stroke="#C8A978" stroke-width="1.5"/>
+                  <circle cx="24" cy="11" r="2" fill="#C8A978"/>
+                </svg>
+              </div>
+              <span class="auth-logo-name">Himo Pay</span>
+            </div>
+
+            <!-- Illustration placeholder -->
+            <div style="display:flex;justify-content:center;margin:var(--sp-3) 0 var(--sp-6);">
+              <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+                <!-- Simple geometric illustration: phone + circle -->
+                <circle cx="70" cy="50" r="48" fill="var(--c-primary-soft)" opacity="0.6"/>
+                <!-- Abstract coin -->
+                <circle cx="70" cy="50" r="28" fill="white" stroke="var(--c-neutral-200)" stroke-width="1.5"/>
+                <circle cx="70" cy="50" r="20" fill="var(--c-primary-soft)" stroke="rgba(200,169,120,0.3)" stroke-width="1"/>
+                <!-- H letter in coin -->
+                <rect x="62" y="40" width="4" height="20" rx="1.5" fill="#C8A978"/>
+                <rect x="74" y="40" width="4" height="20" rx="1.5" fill="rgba(200,169,120,0.7)"/>
+                <rect x="62" y="47" width="16" height="4" rx="1.5" fill="rgba(200,169,120,0.5)"/>
+                <!-- Top decorative elements -->
+                <circle cx="110" cy="25" r="8" fill="var(--c-primary-soft)" stroke="rgba(200,169,120,0.3)" stroke-width="1"/>
+                <circle cx="30" cy="20" r="5" fill="var(--c-primary-soft)" stroke="rgba(200,169,120,0.25)" stroke-width="1"/>
+                <circle cx="118" cy="68" r="6" fill="var(--c-neutral-100)" stroke="var(--c-neutral-200)" stroke-width="1"/>
+              </svg>
+            </div>
+
+            <!-- Heading -->
+            <div class="mb-2">
+              <div class="text-h1">Create your account.</div>
+            </div>
+            <div class="text-body text-muted mb-8" style="margin-bottom:var(--sp-8);">
+              Enter your Myanmar phone number to get started.
+            </div>
+
+            <!-- Phone input -->
+            <div class="form-group mb-5" style="margin-bottom:var(--sp-5);">
+              <div class="form-label">Phone number</div>
+              <div class="phone-input-group">
+                <button class="country-code-btn" aria-label="Country code Myanmar">
+                  <span>🇲🇲</span>
+                  <span>+95</span>
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="opacity:0.4;"><path d="M1 1l4 4 4-4" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+                <input
+                  class="input phone-input"
+                  type="tel"
+                  id="signup-phone-input"
+                  placeholder="9 XXX XXX XXX"
+                  inputmode="tel"
+                  maxlength="11"
+                  aria-label="Phone number for signup"
+                >
+              </div>
+            </div>
+
+            <!-- Continue -->
+            <button class="btn btn-primary-dark mb-5" onclick="showScreen('kyc-personal')" id="signup-phone-btn" style="margin-bottom:var(--sp-5);">
+              Continue
+            </button>
+
+            <div class="divider-text">or</div>
+
+            <!-- Login link -->
+            <div class="subtle-link" style="margin-top:var(--sp-3);">
+              Already have an account?&nbsp;
+              <span class="link" onclick="showScreen('login-phone')">Log in</span>
+            </div>
+
+            <!-- Terms -->
+            <div class="terms-text" style="margin-top:var(--sp-8);">
+              By creating an account, you agree to our<br><a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 07 — KYC — PERSONAL INFORMATION
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-kyc-personal" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="screen-header">
+          <div class="back-btn" onclick="showScreen('signup-phone')" role="button" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14L6 9l5-5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-3) var(--sp-6) var(--sp-12);">
+            <!-- Step indicator -->
+            <div class="step-indicator mb-6" style="margin-bottom:var(--sp-6);">
+              <div class="step-item">
+                <div class="step-circle active">1</div>
+                <div class="step-label active">Personal</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step-item">
+                <div class="step-circle">2</div>
+                <div class="step-label">Identity</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step-item">
+                <div class="step-circle">3</div>
+                <div class="step-label">Verify</div>
+              </div>
+            </div>
+
+            <!-- Heading -->
+            <div class="mb-2"><div class="text-h2">Personal information</div></div>
+            <div class="text-body text-muted mb-6" style="margin-bottom:var(--sp-6);">
+              Please provide your legal name as it appears on your government ID.
+            </div>
+
+            <!-- Fields -->
+            <div style="display:flex;flex-direction:column;gap:var(--sp-4);">
+              <div class="form-group">
+                <div class="form-label">Full name</div>
+                <input class="input" type="text" placeholder="e.g. Ko Aung Kyaw" id="kyc-fullname" aria-label="Full name">
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">Date of birth</div>
+                <input class="input input-date" type="date" id="kyc-dob" aria-label="Date of birth">
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">Gender</div>
+                <div class="radio-group">
+                  <div class="radio-option" onclick="selectRadio(this)" data-value="male" role="radio" aria-checked="false" tabindex="0">
+                    <div class="radio-circle"><div class="radio-inner"></div></div>
+                    <span class="radio-label">Male</span>
+                  </div>
+                  <div class="radio-option" onclick="selectRadio(this)" data-value="female" role="radio" aria-checked="false" tabindex="0">
+                    <div class="radio-circle"><div class="radio-inner"></div></div>
+                    <span class="radio-label">Female</span>
+                  </div>
+                  <div class="radio-option" onclick="selectRadio(this)" data-value="prefer-not" role="radio" aria-checked="false" tabindex="0">
+                    <div class="radio-circle"><div class="radio-inner"></div></div>
+                    <span class="radio-label">Prefer not to say</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security note -->
+            <div class="security-note" style="margin-top:var(--sp-5);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;">
+                <path d="M8 1L2 4V8c0 3.3 2.5 6.4 6 7 3.5-.6 6-3.7 6-7V4L8 1Z" stroke="#A88752" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M5.5 8l2 2 3-3" stroke="#A88752" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="security-note-text">Your information is encrypted and protected by bank-grade security.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-btn-area">
+          <button class="btn btn-primary-dark" onclick="showScreen('kyc-identity')" id="kyc-personal-btn">
+            Next — Identity
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 08 — KYC — IDENTITY
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-kyc-identity" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="screen-header">
+          <div class="back-btn" onclick="showScreen('kyc-personal')" role="button" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14L6 9l5-5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-3) var(--sp-6) var(--sp-12);">
+            <!-- Step indicator -->
+            <div class="step-indicator mb-6" style="margin-bottom:var(--sp-6);">
+              <div class="step-item">
+                <div class="step-circle done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="step-label done">Personal</div>
+              </div>
+              <div class="step-line done"></div>
+              <div class="step-item">
+                <div class="step-circle active">2</div>
+                <div class="step-label active">Identity</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step-item">
+                <div class="step-circle">3</div>
+                <div class="step-label">Verify</div>
+              </div>
+            </div>
+
+            <!-- Heading -->
+            <div class="mb-2"><div class="text-h2">Identity document</div></div>
+            <div class="text-body text-muted mb-6" style="margin-bottom:var(--sp-5);">
+              Select your government-issued ID type.
+            </div>
+
+            <!-- ID type selection -->
+            <div class="id-type-grid mb-5" style="margin-bottom:var(--sp-5);">
+              <div class="id-type-card selected" onclick="selectIdType(this)" data-type="nrc" role="radio" aria-checked="true" tabindex="0">
+                <div class="id-type-icon">🪪</div>
+                <div class="id-type-label">Myanmar NRC</div>
+              </div>
+              <div class="id-type-card" onclick="selectIdType(this)" data-type="passport" role="radio" aria-checked="false" tabindex="0">
+                <div class="id-type-icon">📕</div>
+                <div class="id-type-label">Passport</div>
+              </div>
+              <div class="id-type-card" onclick="selectIdType(this)" data-type="driving" role="radio" aria-checked="false" tabindex="0">
+                <div class="id-type-icon">🚗</div>
+                <div class="id-type-label">Driving License</div>
+              </div>
+              <div class="id-type-card" onclick="selectIdType(this)" data-type="other" role="radio" aria-checked="false" tabindex="0">
+                <div class="id-type-icon">📄</div>
+                <div class="id-type-label">Other</div>
+              </div>
+            </div>
+
+            <!-- ID number input -->
+            <div class="form-group mb-5" style="margin-bottom:var(--sp-5);">
+              <div class="form-label">ID number</div>
+              <input class="input" type="text" placeholder="e.g. 12/MAKHALA(N)000000" id="kyc-id-num" aria-label="ID number">
+            </div>
+
+            <!-- Document upload -->
+            <div class="form-group">
+              <div class="form-label">Upload document</div>
+              <!-- Front -->
+              <div style="margin-bottom:var(--sp-3);">
+                <div style="font-size:12px;color:var(--c-neutral-500);margin-bottom:var(--sp-2);">Front side</div>
+                <div class="doc-frame" onclick="simulateUpload('front')" role="button" aria-label="Upload front side of document" id="doc-front" tabindex="0">
+                  <div class="doc-frame-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M10 4V14M5 9l5-5 5 5" stroke="#C8A978" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="doc-frame-label">Tap to upload<br>or take a photo</div>
+                </div>
+              </div>
+              <!-- Back -->
+              <div>
+                <div style="font-size:12px;color:var(--c-neutral-500);margin-bottom:var(--sp-2);">Back side</div>
+                <div class="doc-frame" onclick="simulateUpload('back')" role="button" aria-label="Upload back side of document" id="doc-back" tabindex="0">
+                  <div class="doc-frame-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M10 4V14M5 9l5-5 5 5" stroke="#C8A978" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="doc-frame-label">Tap to upload<br>or take a photo</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reassurance note -->
+            <div class="security-note" style="margin-top:var(--sp-5);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;">
+                <path d="M8 1L2 4V8c0 3.3 2.5 6.4 6 7 3.5-.6 6-3.7 6-7V4L8 1Z" stroke="#A88752" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="8" cy="9" r="1" fill="#A88752"/>
+                <path d="M8 6v2" stroke="#A88752" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <span class="security-note-text">Documents are securely reviewed and immediately encrypted. We never share your data.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-btn-area">
+          <button class="btn btn-primary-dark" onclick="showScreen('kyc-verify')" id="kyc-identity-btn">
+            Next — Verification
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 09 — KYC — VERIFICATION
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-kyc-verify" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="screen-header">
+          <div class="back-btn" onclick="showScreen('kyc-identity')" role="button" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14L6 9l5-5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-3) var(--sp-6) var(--sp-12);">
+            <!-- Step indicator -->
+            <div class="step-indicator mb-6" style="margin-bottom:var(--sp-6);">
+              <div class="step-item">
+                <div class="step-circle done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="step-label done">Personal</div>
+              </div>
+              <div class="step-line done"></div>
+              <div class="step-item">
+                <div class="step-circle done">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="step-label done">Identity</div>
+              </div>
+              <div class="step-line done"></div>
+              <div class="step-item">
+                <div class="step-circle active">3</div>
+                <div class="step-label active">Verify</div>
+              </div>
+            </div>
+
+            <!-- Heading -->
+            <div class="mb-2"><div class="text-h2">Face verification</div></div>
+            <div class="text-body text-muted mb-5" style="margin-bottom:var(--sp-5);">
+              We need a selfie to confirm your identity matches your document.
+            </div>
+
+            <!-- Selfie frame illustration -->
+            <div style="position:relative;margin-bottom:var(--sp-5);">
+              <div class="selfie-frame">
+                <!-- Background -->
+                <div style="position:absolute;inset:0;background:linear-gradient(145deg,#1A1A1A,#0F0F0F);"></div>
+                <!-- Oval guide -->
+                <div class="selfie-frame-overlay">
+                  <div class="selfie-oval">
+                    <!-- Placeholder face silhouette -->
+                    <svg width="80" height="90" viewBox="0 0 80 90" fill="none" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                      <ellipse cx="40" cy="35" rx="22" ry="26" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                      <ellipse cx="40" cy="80" rx="30" ry="20" fill="rgba(255,255,255,0.04)"/>
+                      <circle cx="32" cy="32" r="3" fill="rgba(255,255,255,0.10)"/>
+                      <circle cx="48" cy="32" r="3" fill="rgba(255,255,255,0.10)"/>
+                      <path d="M34 44 Q40 48 46 44" stroke="rgba(255,255,255,0.10)" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <!-- Corner marks -->
+                <div class="selfie-corner tl"></div>
+                <div class="selfie-corner tr"></div>
+                <div class="selfie-corner bl"></div>
+                <div class="selfie-corner br"></div>
+                <!-- Scan line -->
+                <div style="position:absolute;left:16px;right:16px;height:1px;background:linear-gradient(90deg,transparent,rgba(200,169,120,0.5),transparent);animation:scanLine 2s ease-in-out infinite;" id="scan-line"></div>
+              </div>
+              <style>
+                @keyframes scanLine {
+                  0% { top: 20%; }
+                  50% { top: 80%; }
+                  100% { top: 20%; }
+                }
+                #scan-line { position: absolute; }
+              </style>
+            </div>
+
+            <!-- Progress steps -->
+            <div class="verify-progress mb-5" style="margin-bottom:var(--sp-5);">
+              <div class="verify-step-item">
+                <div class="verify-step-icon done">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="9" fill="rgba(45,106,79,0.15)"/>
+                    <path d="M5 9l3 3 5-5" stroke="#2D6A4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="verify-step-text">
+                  <div style="font-size:13px;font-weight:600;color:var(--c-black);">Document verified</div>
+                  <div style="font-size:11px;color:var(--c-neutral-400);margin-top:1px;">NRC uploaded successfully</div>
+                </div>
+                <div style="font-size:11px;color:#2D6A4F;font-weight:600;">Done</div>
+              </div>
+              <div class="verify-step-item">
+                <div class="verify-step-icon processing">
+                  <div class="loading-spinner" style="width:16px;height:16px;border-color:rgba(200,169,120,0.25);border-top-color:var(--c-primary);"></div>
+                </div>
+                <div class="verify-step-text">
+                  <div style="font-size:13px;font-weight:600;color:var(--c-black);">Face scan</div>
+                  <div style="font-size:11px;color:var(--c-neutral-400);margin-top:1px;">Position your face in the oval</div>
+                </div>
+                <div style="font-size:11px;color:var(--c-primary-dark);font-weight:600;">In progress</div>
+              </div>
+              <div class="verify-step-item">
+                <div class="verify-step-icon pending">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="8" stroke="var(--c-neutral-300)" stroke-width="1.5"/>
+                    <path d="M9 5v5l3 2" stroke="var(--c-neutral-400)" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="verify-step-text">
+                  <div style="font-size:13px;font-weight:600;color:var(--c-neutral-500);">Final review</div>
+                  <div style="font-size:11px;color:var(--c-neutral-400);margin-top:1px;">Usually takes 1–2 minutes</div>
+                </div>
+                <div style="font-size:11px;color:var(--c-neutral-400);font-weight:500;">Pending</div>
+              </div>
+            </div>
+
+            <!-- Reassurance -->
+            <div style="padding:var(--sp-4);background:var(--c-white);border-radius:var(--r-lg);border:var(--border-light);text-align:center;">
+              <div style="font-size:12px;color:var(--c-neutral-400);line-height:1.55;">
+                Face data is processed locally and never stored.<br>
+                <span style="color:var(--c-primary-dark);font-weight:500;">Your privacy is our priority.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-btn-area">
+          <button class="btn btn-primary" onclick="showScreen('signup-otp')" id="kyc-verify-btn">
+            Take Selfie &amp; Continue
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 10 — SIGN UP — OTP
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-signup-otp" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div class="screen-header">
+          <div class="back-btn" onclick="showScreen('kyc-verify')" role="button" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 14L6 9l5-5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="padding:var(--sp-3) var(--sp-6) var(--sp-8);">
+            <!-- Icon -->
+            <div style="width:52px;height:52px;border-radius:14px;background:var(--c-primary-soft);border:1px solid rgba(200,169,120,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:var(--sp-5);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="5" width="18" height="14" rx="3" stroke="#A88752" stroke-width="1.5"/>
+                <path d="M3 9l9 6 9-6" stroke="#A88752" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <div class="mb-2"><div class="text-h1">Verify your number.</div></div>
+            <div class="text-body text-muted mb-8" style="margin-bottom:var(--sp-8);">
+              We sent a 6-digit code to<br>
+              <strong style="color:var(--c-black);font-weight:600;">+95 9 456 789 012</strong>
+            </div>
+
+            <!-- OTP Cells -->
+            <div class="otp-group mb-6" style="margin-bottom:var(--sp-6);" id="signup-otp-group">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="sotp-0" aria-label="Code digit 1">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="sotp-1" aria-label="Code digit 2">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="sotp-2" aria-label="Code digit 3">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="sotp-3" aria-label="Code digit 4">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="sotp-4" aria-label="Code digit 5">
+              <input class="otp-cell" type="text" inputmode="numeric" maxlength="1" id="sotp-5" aria-label="Code digit 6">
+            </div>
+
+            <!-- Resend -->
+            <div class="otp-actions">
+              <div class="countdown-text">
+                Resend code in <span class="countdown-time" id="signup-countdown">01:00</span>
+              </div>
+              <div class="resend-link disabled" id="signup-resend">Resend code</div>
+            </div>
+
+            <!-- Change number -->
+            <div class="change-phone-link" onclick="showScreen('signup-phone')">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 7l6 6M1 7h12" stroke="#737373" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Change phone number
+            </div>
+
+            <button class="btn btn-primary-dark" style="margin-top:var(--sp-8);" onclick="showScreen('create-passcode')" id="signup-otp-verify-btn">
+              Verify &amp; Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 11 — CREATE PASSCODE
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-create-passcode" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <div class="status-bar light">
+          <span class="status-time">12:52</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="#0A0A0A" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#0A0A0A" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#0A0A0A" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#0A0A0A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#0A0A0A" stroke-opacity="0.3"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#0A0A0A" opacity="0.8"/></svg>
+          </div>
+        </div>
+
+        <div style="flex:1;display:flex;flex-direction:column;padding:var(--sp-4) var(--sp-6) var(--sp-8);">
+          <!-- Heading -->
+          <div class="text-center" style="margin-bottom:var(--sp-8);">
+            <div style="width:52px;height:52px;background:var(--c-black);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-5);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C9.2 2 7 4.2 7 7v2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2V7c0-2.8-2.2-5-5-5Z" stroke="#C8A978" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="15" r="2" fill="#C8A978"/>
+                <path d="M12 17v2" stroke="#C8A978" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="text-h2 mb-2" id="create-pc-title" style="margin-bottom:8px;">Create your passcode</div>
+            <div class="text-body text-muted" id="create-pc-sub">Choose a 6-digit passcode to secure your account.</div>
+          </div>
+
+          <!-- Passcode dots -->
+          <div class="passcode-dots mb-8" style="margin-bottom:var(--sp-8);" id="create-passcode-dots">
+            <div class="passcode-dot" id="cpc-0"></div>
+            <div class="passcode-dot" id="cpc-1"></div>
+            <div class="passcode-dot" id="cpc-2"></div>
+            <div class="passcode-dot" id="cpc-3"></div>
+            <div class="passcode-dot" id="cpc-4"></div>
+            <div class="passcode-dot" id="cpc-5"></div>
+          </div>
+
+          <!-- Keypad -->
+          <div class="keypad" id="create-keypad">
+            <div class="keypad-btn" onclick="keypadPress('create',1)"><span class="keypad-num">1</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',2)"><span class="keypad-num">2</span><span class="keypad-sub">ABC</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',3)"><span class="keypad-num">3</span><span class="keypad-sub">DEF</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',4)"><span class="keypad-num">4</span><span class="keypad-sub">GHI</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',5)"><span class="keypad-num">5</span><span class="keypad-sub">JKL</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',6)"><span class="keypad-num">6</span><span class="keypad-sub">MNO</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',7)"><span class="keypad-num">7</span><span class="keypad-sub">PQRS</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',8)"><span class="keypad-num">8</span><span class="keypad-sub">TUV</span></div>
+            <div class="keypad-btn" onclick="keypadPress('create',9)"><span class="keypad-num">9</span><span class="keypad-sub">WXYZ</span></div>
+            <div class="keypad-btn ghost"></div>
+            <div class="keypad-btn" onclick="keypadPress('create',0)"><span class="keypad-num">0</span></div>
+            <div class="keypad-btn ghost" onclick="keypadDelete('create')">
+              <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+                <path d="M8 1H20C20.6 1 21 1.4 21 2V14C21 14.6 20.6 15 20 15H8L1 8L8 1Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M14 5.5L10 10.5M10 5.5L14 10.5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Security guidance -->
+          <div class="security-note" style="margin-top:var(--sp-4);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;opacity:0.7;">
+              <circle cx="7" cy="7" r="6.5" stroke="#A88752"/>
+              <path d="M7 4v4M7 9.5v.5" stroke="#A88752" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="security-note-text">Do not share your passcode with anyone, including Himo Pay support.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           SCREEN 12 — HOME ENTRY
+           ═══════════════════════════════════════════════════════ -->
+      <div class="screen" id="screen-home" style="background:var(--bg-light);flex-direction:column;" role="main">
+        <!-- Light status bar -->
+        <div class="status-bar" style="background:var(--bg-light); color:var(--c-black);">
+          <span class="status-time">5:14</span>
+          <div class="status-icons">
+            <svg width="17" height="12" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" fill="var(--c-black)" opacity="0.5"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="var(--c-black)" opacity="0.7"/><rect x="9" y="0" width="3" height="12" rx="1" fill="var(--c-black)" opacity="0.9"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="var(--c-black)"/></svg>
+            <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.5C10.5 2.5 12.7 3.6 14.2 5.4L15.5 4.1C13.6 2 11 0.8 8 0.8C5 0.8 2.4 2 0.5 4.1L1.8 5.4C3.3 3.6 5.5 2.5 8 2.5Z" fill="var(--c-black)" opacity="0.5"/><path d="M8 5.5C9.8 5.5 11.4 6.3 12.5 7.6L13.8 6.3C12.3 4.7 10.3 3.8 8 3.8C5.7 3.8 3.7 4.7 2.2 6.3L3.5 7.6C4.6 6.3 6.2 5.5 8 5.5Z" fill="var(--c-black)" opacity="0.75"/><circle cx="8" cy="11" r="1.8" fill="var(--c-black)"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="var(--c-black)" stroke-opacity="0.4"/><rect x="2" y="2" width="17" height="8" rx="2" fill="var(--c-black)" opacity="0.8"/><path d="M23 4V8C23.8 7.5 24.5 6.8 24.5 6C24.5 5.2 23.8 4.5 23 4Z" fill="var(--c-black)" opacity="0.4"/></svg>
+          </div>
+        </div>
+
+        <!-- Home scroll content -->
+        <div class="home-scroll">
+          <!-- Top light section -->
+          <div class="home-top" style="padding: 16px 20px 8px 20px; background: var(--bg-light);">
+            <!-- Greeting row -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <!-- Logo -->
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--c-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px;">H</div>
+                <div style="display: flex; flex-direction: column;">
+                  <div style="font-size: 12px; color: var(--c-neutral-500);">Good Evening</div>
+                  <div style="font-size: 14px; font-weight: 700; color: var(--c-black);">HTET MYAT OO</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; color: var(--c-black); cursor: pointer;">
+                  English
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div style="position: relative; cursor: pointer;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                  </svg>
+                  <div style="position: absolute; top: -4px; right: -4px; background: #E54545; color: white; font-size: 9px; font-weight: bold; border-radius: 10px; padding: 2px 4px; border: 2px solid var(--bg-light); line-height: 1;">92</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Balance card -->
+            <div class="home-balance-card" style="background: var(--c-white); border-radius: 16px; padding: 16px 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06), 0 4px 0px var(--c-primary); position: relative; color: var(--c-black); border: none; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; backdrop-filter: none;">
+              
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <!-- Left side -->
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  <div style="font-size: 14px; color: var(--c-neutral-500);">Balance</div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 24px; font-weight: 700; color: var(--c-black); letter-spacing: -0.5px;">0 MMK</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Right side (Scan Me) -->
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                  <span style="font-size: 13px; color: var(--c-black);">Scan Me</span>
+                  <div style="width: 38px; height: 38px; border: 1px solid var(--c-neutral-200); border-radius: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; background: var(--c-white);">
+                    <!-- QR Code Icon -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="1.5">
+                      <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+                      <rect x="14" y="4" width="6" height="6" rx="1"></rect>
+                      <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+                      <path d="M14 14h2v2h-2z"></path>
+                      <path d="M18 14h2v6h-2z"></path>
+                      <path d="M14 18h2v2h-2z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <!-- Bottom Left (Member Points) -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <!-- Brand badge/star icon -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="var(--c-white)" stroke="var(--c-primary)" stroke-width="1.5"/>
+                    <path d="M12 7l1.2 3.8h4l-3.2 2.3 1.2 3.9-3.2-2.4-3.2 2.4 1.2-3.9-3.2-2.3h4z" fill="var(--c-primary)"/>
+                  </svg>
+                  <span style="font-size: 14px; color: var(--c-neutral-500);">Member</span>
+                  <span style="font-size: 14px; font-weight: 600; color: var(--c-black); margin-left: 2px;">661 Points</span>
+                </div>
+                
+                <!-- Bottom Right (Explore More) -->
+                <div style="background: var(--c-neutral-100); padding: 6px 10px 6px 14px; border-radius: 20px; font-size: 12px; color: var(--c-black); display: flex; align-items: center; gap: 4px; cursor: pointer; font-weight: 500;">
+                  Explore More
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary Actions -->
+          <div style="display: flex; gap: 8px; padding: 24px var(--sp-6) var(--sp-2) var(--sp-6); background: var(--bg-light);">
+            <!-- Transfer -->
+            <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--c-white); padding: 12px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; border: 1px solid rgba(0,0,0,0.03);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="1.5">
+                <path d="M17 10l3-3-3-3" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="20" y1="7" x2="4" y2="7" stroke-linecap="round"/>
+                <path d="M7 14l-3 3 3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="4" y1="17" x2="20" y2="17" stroke-linecap="round"/>
+              </svg>
+              <span style="font-size: 13px; font-weight: 500; color: var(--c-black);">Transfer</span>
+            </div>
+            <!-- Cash In -->
+            <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--c-white); padding: 12px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; border: 1px solid rgba(0,0,0,0.03);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="1.5">
+                <line x1="17" y1="7" x2="7" y2="17" stroke-linecap="round"/>
+                <polyline points="17 17 7 17 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span style="font-size: 13px; font-weight: 500; color: var(--c-black);">Cash In</span>
+            </div>
+            <!-- Cash Out -->
+            <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--c-white); padding: 12px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; border: 1px solid rgba(0,0,0,0.03);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-black)" stroke-width="1.5">
+                <line x1="7" y1="17" x2="17" y2="7" stroke-linecap="round"/>
+                <polyline points="7 7 17 7 17 17" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span style="font-size: 13px; font-weight: 500; color: var(--c-black);">Cash Out</span>
+            </div>
+          </div>
+
+          <!-- Tickets Banner -->
+          <div style="padding: 0 var(--sp-5) var(--sp-4) var(--sp-5);">
+            <div style="background: linear-gradient(to right, var(--c-primary), #B29567); border-radius: var(--r-xl); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; color: white; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(200,169,120,0.3);">
+              <!-- Left content -->
+              <div style="display: flex; flex-direction: column; z-index: 2;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 7v10"/><path d="M18 7v10"/></svg>
+                  <span style="font-size: 14px; font-weight: 500;">Your Tickets</span>
+                </div>
+                <div style="font-size: 32px; font-weight: 700; margin-top: 4px; line-height: 1;">0</div>
+              </div>
+              
+              <!-- Right Graphic -->
+              <div style="z-index: 2; display: flex; align-items: center; justify-content: flex-end;">
+                <div style="font-size: 14px; font-weight: 700; color: #FFF; text-align: right; line-height: 1.2;">
+                  Himo Pay<br>
+                  <span style="font-size: 10px; color: rgba(255,255,255,0.8);">Exclusive</span>
+                </div>
+              </div>
+              <!-- Decorative elements -->
+              <div style="position: absolute; top: -20px; right: 20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1;"></div>
+              
+              <!-- Arrow -->
+              <div style="position: absolute; right: 12px; top: 12px; width: 20px; height: 20px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 2;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Services Section -->
+          <div class="home-section" style="padding-top: var(--sp-2);">
+            <div class="home-section-header">
+              <span class="home-section-title">Services</span>
+              <span class="home-section-link">See all</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px 8px;">
+              <!-- 1. Mobile Topup -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Mobile<br>Topup</span>
+              </div>
+              <!-- 2. Pay Bills -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                  <div style="position:absolute; top:-4px; right:-8px; background:#FF5A00; color:white; font-size:9px; font-weight:700; padding:2px 4px; border-radius:8px;">Hot</div>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Pay Bills</span>
+              </div>
+              <!-- 3. Gift Cards -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Gift Cards</span>
+              </div>
+              <!-- 4. Group Deals -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path><path d="M14 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path></svg>
+                  <div style="position:absolute; top:-4px; right:-8px; background:#4AC488; color:white; font-size:9px; font-weight:700; padding:2px 4px; border-radius:8px;">Promo</div>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Group Deals</span>
+              </div>
+              <!-- 5. Events -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <div style="position:absolute; top:-4px; right:-8px; background:#3D85C6; color:white; font-size:9px; font-weight:700; padding:2px 4px; border-radius:8px;">New</div>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Events</span>
+              </div>
+              <!-- 6. Movies -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 19 4 19 20 5 20 5 4"></polygon><line x1="5" y1="8" x2="19" y2="8"></line><line x1="5" y1="16" x2="19" y2="16"></line><line x1="9" y1="4" x2="9" y2="20"></line><line x1="15" y1="4" x2="15" y2="20"></line></svg>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Movies</span>
+              </div>
+              <!-- 7. Insurance -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">Insurance</span>
+              </div>
+              <!-- 8. More -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;">
+                <div style="width:48px; height:48px; border-radius:12px; background:var(--c-white); box-shadow:0 2px 8px rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; position:relative;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary)" stroke-width="1.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                </div>
+                <span style="font-size:11px; font-weight:500; color:var(--c-black); text-align:center; line-height:1.2;">More</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Promo Banners -->
+          <div style="margin-top: 16px; padding: 0 var(--sp-5);">
+            <div style="width: 100%; height: 120px; border-radius: var(--r-xl); overflow: hidden; position: relative;">
+              <img src="event_visual_rewards.jpg" alt="Promo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="display: flex; justify-content: center; gap: 6px; margin-top: 12px;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--c-primary);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.1);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.1);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.1);"></div>
+            </div>
+          </div>
+
+          <!-- History & What's Up Tabs -->
+          <div class="home-section" style="padding-top: var(--sp-2);">
+            <!-- Tabs Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-4); padding: 0 var(--sp-2);">
+              <div style="display: flex; gap: var(--sp-5);">
+                <div id="tab-history" onclick="switchHomeTab('history')" style="font-size: 15px; font-weight: 600; color: var(--c-black); padding-bottom: 6px; border-bottom: 2px solid var(--c-primary); cursor: pointer;">History</div>
+                <div id="tab-whatsup" onclick="switchHomeTab('whatsup')" style="font-size: 15px; font-weight: 500; color: var(--c-neutral-400); padding-bottom: 6px; border-bottom: 2px solid transparent; cursor: pointer;">What's Up</div>
+              </div>
+              <div style="font-size: 12px; font-weight: 500; color: var(--c-neutral-500); cursor: pointer;">See all</div>
+            </div>
+
+            <!-- History Content -->
+            <div id="content-history" style="display: block;">
+              <!-- Card -->
+              <div style="background: var(--c-white); border-radius: var(--r-xl); padding: 20px; border: var(--border-light); box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+                
+                <!-- Card Header -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                  <div style="font-size: 15px; font-weight: 600; color: var(--c-black);">Recent History</div>
+                  <div style="font-size: 12px; font-weight: 500; color: var(--c-black); background: var(--c-white); border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 6px 12px; cursor: pointer;">See all</div>
+                </div>
+
+              <!-- Transactions List -->
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                
+                <!-- Tx 1 -->
+                <div style="display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 16px;">
+                  <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--c-primary), #B29567); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <!-- Move Money Icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-white)" stroke-width="1.5">
+                      <path d="M21 11V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+                      <path d="M16 15l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="11" y1="18" x2="19" y2="18" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-black); line-height: 1.3; margin-bottom: 2px;">Move Money from Wallet to Bank</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">1 September 2026, 7:39 AM</div>
+                  </div>
+                  <div style="font-size: 13px; font-weight: 600; color: #E54545; white-space: nowrap;">-32,000 MMK</div>
+                </div>
+
+                <!-- Tx 2 -->
+                <div style="display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 16px;">
+                  <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--c-primary), #B29567); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <!-- Receive Money Icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-white)" stroke-width="1.5">
+                      <path d="M17 10l3-3-3-3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="20" y1="7" x2="4" y2="7" stroke-linecap="round"/>
+                      <path d="M7 14l-3 3 3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="4" y1="17" x2="20" y2="17" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-black); line-height: 1.3; margin-bottom: 2px;">Receive Money from Wallet</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">1 September 2026, 7:34 AM</div>
+                  </div>
+                  <div style="font-size: 13px; font-weight: 600; color: #4AC488; white-space: nowrap;">+32,000 MMK</div>
+                </div>
+
+                <!-- Tx 3 -->
+                <div style="display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 16px;">
+                  <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--c-primary), #B29567); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-white)" stroke-width="1.5">
+                      <path d="M21 11V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+                      <path d="M16 15l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="11" y1="18" x2="19" y2="18" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-black); line-height: 1.3; margin-bottom: 2px;">Move Money from Wallet to Bank</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">31 July 2026, 8:09 PM</div>
+                  </div>
+                  <div style="font-size: 13px; font-weight: 600; color: #E54545; white-space: nowrap;">-32,380 MMK</div>
+                </div>
+
+                <!-- Tx 4 -->
+                <div style="display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 16px;">
+                  <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--c-primary), #B29567); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-white)" stroke-width="1.5">
+                      <path d="M17 10l3-3-3-3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="20" y1="7" x2="4" y2="7" stroke-linecap="round"/>
+                      <path d="M7 14l-3 3 3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="4" y1="17" x2="20" y2="17" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-black); line-height: 1.3; margin-bottom: 2px;">Receive Money from Wallet</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">31 July 2026, 8:09 PM</div>
+                  </div>
+                  <div style="font-size: 13px; font-weight: 600; color: #4AC488; white-space: nowrap;">+32,000 MMK</div>
+                </div>
+
+                <!-- Tx 5 -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--c-primary), #B29567); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-white)" stroke-width="1.5">
+                      <path d="M21 11V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/>
+                      <path d="M16 15l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="11" y1="18" x2="19" y2="18" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-black); line-height: 1.3; margin-bottom: 2px;">Move Money from Wallet to Bank</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">31 July 2026, 8:07 PM</div>
+                  </div>
+                  <div style="font-size: 13px; font-weight: 600; color: #E54545; white-space: nowrap;">-1,000 MMK</div>
+                </div>
+                
+              </div>
+            </div>
+
+            <!-- What's Up Content -->
+            <div id="content-whatsup" style="display: none;">
+              <!-- News List -->
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- News 1 -->
+                <div style="background: var(--c-white); border-radius: var(--r-xl); padding: 12px; display: flex; gap: 12px; border: var(--border-light); box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+                  <div style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0;">
+                    <img src="media_1789294776649.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                  <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--c-black); line-height: 1.4; margin-bottom: 8px;">Himo Pay Wallet ကနေ မည်သည့်ဘဏ်အကောင့်ကိုမဆို ငွေလွှဲဖို့အတွက်</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">14 January 2026, 4:19 PM</div>
+                  </div>
+                </div>
+                <!-- News 2 -->
+                <div style="background: var(--c-white); border-radius: var(--r-xl); padding: 12px; display: flex; gap: 12px; border: var(--border-light); box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+                  <div style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0;">
+                    <img src="media_1789295932348.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                  <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--c-black); line-height: 1.4; margin-bottom: 8px;">နှစ်သစ်မှာ ချစ်ရသူတွေအတွက် မုန့်ဖိုးပေးချင်ရင် Himo Pay နဲ့ ပေးလိုက်နော်</div>
+                    <div style="font-size: 11px; color: var(--c-neutral-500);">14 January 2026, 2:00 PM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom pad -->
+          <div style="height:100px;"></div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav" style="justify-content: space-around; padding: 0 10px;">
+          <div class="bottom-nav-item active" role="tab" tabindex="0">
+            <div class="bottom-nav-icon">
+              <!-- Home -->
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M2 11L11 3l9 8" stroke="var(--c-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 9.5V19a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V9.5" fill="var(--c-primary)" stroke="none"/>
+              </svg>
+            </div>
+            <span class="bottom-nav-label" style="color:var(--c-primary);font-weight:600;">Home</span>
+          </div>
+          <div class="bottom-nav-item" role="tab" tabindex="0">
+            <div class="bottom-nav-icon">
+              <!-- Wallet -->
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <rect x="2" y="5" width="18" height="13" rx="3" stroke="#A3A3A3" stroke-width="1.5"/>
+                <path d="M2 9h18" stroke="#A3A3A3" stroke-width="1.5"/>
+                <rect x="4" y="12" width="5" height="2.5" rx="1" fill="#A3A3A3"/>
+              </svg>
+            </div>
+            <span class="bottom-nav-label">Wallet</span>
+          </div>
+          <div class="bottom-nav-item" style="position:relative; flex: 0 0 60px;" role="tab" tabindex="0">
+            <!-- Central floating scan button -->
+            <div style="position: absolute; top: -28px; left: 50%; transform: translateX(-50%); width: 56px; height: 56px; background: var(--c-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(200,169,120,0.4); border: 4px solid var(--c-white);">
+              <!-- Scan Icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+                <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+                <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+                <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                <rect x="7" y="7" width="10" height="10" rx="1"></rect>
+              </svg>
+            </div>
+            <span class="bottom-nav-label" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); white-space: nowrap;">Scan</span>
+          </div>
+          <div class="bottom-nav-item" role="tab" tabindex="0">
+            <div class="bottom-nav-icon">
+              <!-- Rewards -->
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2v11c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" stroke="#A3A3A3" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <span class="bottom-nav-label">Rewards</span>
+          </div>
+          <div class="bottom-nav-item" role="tab" tabindex="0">
+            <div class="bottom-nav-icon">
+              <!-- Profile -->
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <circle cx="11" cy="8" r="4" stroke="#A3A3A3" stroke-width="1.5"/>
+                <path d="M3 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#A3A3A3" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="bottom-nav-label">Profile</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phone-frame -->
+  </div><!-- /device-container -->
+</div><!-- /app-shell -->
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT — INTERACTIONS & LOGIC
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+
+// ─── Screen Navigation ───────────────────────────────────────────
+const screens = {
+  'splash':          'screen-splash',
+  'campaign':        'screen-campaign',
+  'login-phone':     'screen-login-phone',
+  'login-otp':       'screen-login-otp',
+  'login-passcode':  'screen-login-passcode',
+  'signup-phone':    'screen-signup-phone',
+  'kyc-personal':    'screen-kyc-personal',
+  'kyc-identity':    'screen-kyc-identity',
+  'kyc-verify':      'screen-kyc-verify',
+  'signup-otp':      'screen-signup-otp',
+  'create-passcode': 'screen-create-passcode',
+  'home':            'screen-home',
+};
+
+const darkScreens = ['splash', 'campaign'];
+
+function showScreen(id) {
+  // Hide all
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+    s.style.animation = '';
+  });
+
+  // Show target
+  const targetId = screens[id];
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  target.classList.add('active');
+  target.style.animation = 'screenEnter 0.3s cubic-bezier(0.16,1,0.3,1) both';
+
+  // Phone frame dark mode
+  const frame = document.getElementById('phone-frame');
+  if (darkScreens.includes(id)) {
+    frame.classList.add('dark-bg');
+  } else {
+    frame.classList.remove('dark-bg');
+  }
+
+  // Nav buttons
+  document.querySelectorAll('.screen-nav-btn').forEach(b => b.classList.remove('active'));
+  const navBtn = document.getElementById('nav-' + id);
+  if (navBtn) navBtn.classList.add('active');
+
+  // Screen-specific init
+  if (id === 'login-otp') initCountdown('login', 59);
+  if (id === 'signup-otp') initCountdown('signup', 60);
+  if (id === 'login-passcode') resetPasscode('login');
+  if (id === 'create-passcode') resetPasscode('create');
+  if (id === 'home') initHomeEntry();
+}
+
+// ─── Campaign Countdown Timer ─────────────────────────────────────
+(function startCampaignTimer() {
+  let sec = 31, min = 44, hrs = 6, days = 18;
+  setInterval(() => {
+    sec--;
+    if (sec < 0) { sec = 59; min--; }
+    if (min < 0) { min = 59; hrs--; }
+    if (hrs < 0) { hrs = 23; days--; }
+    const s = document.getElementById('camp-sec');
+    const m = document.getElementById('camp-min');
+    const h = document.getElementById('camp-hrs');
+    const d = document.getElementById('camp-days');
+    if (s) s.textContent = String(sec).padStart(2, '0');
+    if (m) m.textContent = String(min).padStart(2, '0');
+    if (h) h.textContent = String(hrs).padStart(2, '0');
+    if (d) d.textContent = String(days).padStart(2, '0');
+  }, 1000);
+})();
+
+// ─── OTP Countdown ───────────────────────────────────────────────
+const countdownIntervals = {};
+
+function initCountdown(prefix, total) {
+  clearInterval(countdownIntervals[prefix]);
+  let remaining = total;
+  const el = document.getElementById(prefix + '-countdown');
+  const resend = document.getElementById(prefix + '-resend');
+  if (!el) return;
+  if (resend) { resend.classList.add('disabled'); }
+
+  function tick() {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    if (remaining <= 0) {
+      clearInterval(countdownIntervals[prefix]);
+      el.textContent = '00:00';
+      if (resend) resend.classList.remove('disabled');
+    }
+    remaining--;
+  }
+  tick();
+  countdownIntervals[prefix] = setInterval(tick, 1000);
+}
+
+function resetLoginCountdown() {
+  initCountdown('login', 59);
+}
+
+// ─── OTP Input Logic ──────────────────────────────────────────────
+function initOTP(prefix, count) {
+  for (let i = 0; i < count; i++) {
+    const cell = document.getElementById(prefix + '-' + i);
+    if (!cell) continue;
+    cell.addEventListener('input', function(e) {
+      const val = e.target.value.replace(/\D/g, '').slice(-1);
+      e.target.value = val;
+      if (val) {
+        e.target.classList.add('filled');
+        const next = document.getElementById(prefix + '-' + (i + 1));
+        if (next) next.focus();
+      } else {
+        e.target.classList.remove('filled');
+      }
+    });
+    cell.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && !e.target.value) {
+        const prev = document.getElementById(prefix + '-' + (i - 1));
+        if (prev) { prev.value = ''; prev.classList.remove('filled'); prev.focus(); }
+      }
+    });
+    cell.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+      for (let j = 0; j < count && j < text.length; j++) {
+        const c = document.getElementById(prefix + '-' + j);
+        if (c) { c.value = text[j]; c.classList.add('filled'); }
+      }
+    });
+  }
+}
+
+// Initialize OTP inputs
+initOTP('otp', 6);
+initOTP('sotp', 6);
+
+// ─── Passcode Keypad ─────────────────────────────────────────────
+const passcodePins = { login: [], create: [] };
+const createStep = { phase: 'create', firstPin: [] };
+
+function resetPasscode(prefix) {
+  passcodePins[prefix] = [];
+  for (let i = 0; i < 6; i++) {
+    const dot = document.getElementById(
+      prefix === 'login' ? 'lpc-' + i : 'cpc-' + i
+    );
+    if (dot) { dot.classList.remove('filled', 'animated'); }
+  }
+  if (prefix === 'create') {
+    createStep.phase = 'create';
+    createStep.firstPin = [];
+    const title = document.getElementById('create-pc-title');
+    const sub = document.getElementById('create-pc-sub');
+    if (title) title.textContent = 'Create your passcode';
+    if (sub) sub.textContent = 'Choose a 6-digit passcode to secure your account.';
+  }
+}
+
+function keypadPress(prefix, digit) {
+  if (passcodePins[prefix].length >= 6) return;
+  passcodePins[prefix].push(digit);
+  const idx = passcodePins[prefix].length - 1;
+  const dot = document.getElementById(
+    prefix === 'login' ? 'lpc-' + idx : 'cpc-' + idx
+  );
+  if (dot) {
+    dot.classList.add('filled', 'animated');
+    setTimeout(() => dot.classList.remove('animated'), 300);
+  }
+
+  if (passcodePins[prefix].length === 6) {
+    setTimeout(() => {
+      if (prefix === 'login') {
+        // Navigate to home
+        showScreen('home');
+        passcodePins[prefix] = [];
+      } else if (prefix === 'create') {
+        handleCreatePasscode();
+      }
+    }, 400);
+  }
+}
+
+function keypadDelete(prefix) {
+  if (passcodePins[prefix].length === 0) return;
+  const idx = passcodePins[prefix].length - 1;
+  const dot = document.getElementById(
+    prefix === 'login' ? 'lpc-' + idx : 'cpc-' + idx
+  );
+  if (dot) dot.classList.remove('filled');
+  passcodePins[prefix].pop();
+}
+
+function handleCreatePasscode() {
+  if (createStep.phase === 'create') {
+    createStep.firstPin = [...passcodePins.create];
+    createStep.phase = 'confirm';
+    passcodePins.create = [];
+    for (let i = 0; i < 6; i++) {
+      const dot = document.getElementById('cpc-' + i);
+      if (dot) dot.classList.remove('filled');
+    }
+    const title = document.getElementById('create-pc-title');
+    const sub = document.getElementById('create-pc-sub');
+    if (title) title.textContent = 'Confirm your passcode';
+    if (sub) sub.textContent = 'Re-enter your 6-digit passcode to confirm.';
+  } else if (createStep.phase === 'confirm') {
+    const match = createStep.firstPin.join('') === passcodePins.create.join('');
+    if (match) {
+      showScreen('home');
+    } else {
+      // Show error shake
+      for (let i = 0; i < 6; i++) {
+        const dot = document.getElementById('cpc-' + i);
+        if (dot) { dot.style.background = '#D64545'; dot.style.borderColor = '#D64545'; }
+      }
+      setTimeout(() => {
+        resetPasscode('create');
+        createStep.phase = 'create';
+        const title = document.getElementById('create-pc-title');
+        const sub = document.getElementById('create-pc-sub');
+        if (title) title.textContent = 'Create your passcode';
+        if (sub) sub.textContent = 'Passcodes did not match. Please try again.';
+      }, 700);
+    }
+  }
+}
+
+function showBiometric() {
+  // Simulate biometric auth
+  setTimeout(() => showScreen('home'), 600);
+}
+
+// ─── Radio Group ──────────────────────────────────────────────────
+function selectRadio(el) {
+  const group = el.closest('.radio-group');
+  if (!group) return;
+  group.querySelectorAll('.radio-option').forEach(opt => {
+    opt.classList.remove('selected');
+    opt.setAttribute('aria-checked', 'false');
+  });
+  el.classList.add('selected');
+  el.setAttribute('aria-checked', 'true');
+}
+
+// ─── ID Type ──────────────────────────────────────────────────────
+function selectIdType(el) {
+  const grid = el.closest('.id-type-grid');
+  if (!grid) return;
+  grid.querySelectorAll('.id-type-card').forEach(card => {
+    card.classList.remove('selected');
+    card.setAttribute('aria-checked', 'false');
+  });
+  el.classList.add('selected');
+  el.setAttribute('aria-checked', 'true');
+}
+
+// ─── Document Upload Simulation ───────────────────────────────────
+function simulateUpload(side) {
+  const el = document.getElementById('doc-' + side);
+  if (!el) return;
+  el.style.borderColor = 'rgba(200,169,120,0.6)';
+  el.innerHTML = `
+    <div class="doc-frame-icon" style="background:rgba(45,106,79,0.15);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M5 10l4 4 6-7" stroke="#2D6A4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="doc-frame-label" style="color:rgba(200,169,120,0.8);">Document uploaded</div>
+  `;
+}
+
+// ─── Tabs Logic (History / What's Up) ───────────────────────────────
+function switchHomeTab(tab) {
+  const tHist = document.getElementById('tab-history');
+  const tWhat = document.getElementById('tab-whatsup');
+  const cHist = document.getElementById('content-history');
+  const cWhat = document.getElementById('content-whatsup');
+  
+  if (tab === 'history') {
+    tHist.style.fontWeight = '600';
+    tHist.style.color = 'var(--c-black)';
+    tHist.style.borderBottomColor = 'var(--c-primary)';
+    
+    tWhat.style.fontWeight = '500';
+    tWhat.style.color = 'var(--c-neutral-400)';
+    tWhat.style.borderBottomColor = 'transparent';
+    
+    cHist.style.display = 'block';
+    cWhat.style.display = 'none';
+  } else {
+    tWhat.style.fontWeight = '600';
+    tWhat.style.color = 'var(--c-black)';
+    tWhat.style.borderBottomColor = 'var(--c-primary)';
+    
+    tHist.style.fontWeight = '500';
+    tHist.style.color = 'var(--c-neutral-400)';
+    tHist.style.borderBottomColor = 'transparent';
+    
+    cWhat.style.display = 'block';
+    cHist.style.display = 'none';
+  }
+}
+
+// ─── Home Entry Animation ─────────────────────────────────────────
+function initHomeEntry() {
+  // Subtle entrance for balance card
+}
+
+// ─── Keyboard accessibility: Enter on back-btn ────────────────────
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && e.target.classList.contains('back-btn')) {
+    e.target.click();
+  }
+});
+
+// ─── Init ─────────────────────────────────────────────────────────
+// Splash screen auto-transition after 3 seconds in demo mode
+// (user can also click manually)
+window.addEventListener('load', function() {
+  // Start on splash, already set
+});
+</script>
+
+</body>
+</html>

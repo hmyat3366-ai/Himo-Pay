@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HimoPay — Senior UI/UX Card Redesign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange-brand: #FF5E14;
+      --orange-glow: rgba(255, 94, 20, 0.25);
+      --bg-dark: #0D1117;
+      --card-charcoal: #161B22;
+      --text-main: #FFFFFF;
+      --text-muted: #8B949E;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: #090D14;
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .header {
+      text-align: center;
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 94, 20, 0.12);
+      border: 1px solid rgba(255, 94, 20, 0.28);
+      color: #FF7A38;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Device Preview Frame */
+    .preview-container {
+      width: 100%;
+      max-width: 414px;
+      background: #111620;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 36px;
+      padding: 24px 18px 28px;
+      box-shadow: 0 28px 64px -12px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    /* ── The Digital Wallet Card ── */
+    .wallet-card {
+      width: 100%;
+      background: linear-gradient(135deg, #1B202A 0%, #131720 55%, #0D1017 100%);
+      border: 1.2px solid rgba(255, 255, 255, 0.13);
+      border-radius: 24px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.55), 0 0 40px -10px rgba(255, 94, 20, 0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wallet-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 44px -10px rgba(0, 0, 0, 0.65), 0 0 50px -8px rgba(255, 94, 20, 0.2);
+    }
+    .card-sheen {
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 94, 20, 0.18) 0%, rgba(255, 94, 20, 0) 70%);
+      pointer-events: none;
+    }
+
+    /* Top Row */
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .scan-me-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .scan-me-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .scan-text {
+      text-align: right;
+    }
+    .scan-text .t1 {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.1;
+    }
+    .scan-text .t2 {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--orange-brand);
+      line-height: 1.1;
+    }
+    .qr-box {
+      width: 22px;
+      height: 22px;
+      background: #FFFFFF;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-box svg {
+      width: 16px;
+      height: 16px;
+      fill: #0F131A;
+    }
+
+    /* Balance */
+    .balance-label-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .balance-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.68);
+    }
+    .eye-icon {
+      cursor: pointer;
+      opacity: 0.75;
+      display: flex;
+      align-items: center;
+    }
+    .eye-icon:hover { opacity: 1; }
+    .balance-val {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      color: #FFFFFF;
+      margin-bottom: 22px;
+      line-height: 1.15;
+    }
+
+    /* Loyalty Footer */
+    .loyalty-strip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .loyalty-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+    }
+    .star-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 94, 20, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange-brand);
+      font-size: 12px;
+    }
+    .tier-name { color: rgba(255,255,255,0.72); }
+    .pts-bold { font-weight: 800; color: #FFFFFF; }
+
+    .explore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 5px 11px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .explore-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ── Quick Actions Bar ── */
+    .action-dock {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 6px;
+      background: #161B22;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .action-btn:hover {
+      background: #21262D;
+      border-color: rgba(255, 94, 20, 0.3);
+      transform: translateY(-1px);
+    }
+    .action-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--orange-brand);
+      stroke-width: 2.2;
+    }
+
+    /* Explanations Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 860px;
+      width: 100%;
+      margin-top: 36px;
+    }
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .feature-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #FF8B4D;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .feature-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="badge">SENIOR UI/UX REDESIGN • V2</div>
+    <h1>Pure Digital Wallet Card & Action Dock</h1>
+    <p class="subtitle">Eliminated artificial plastic debit artifacts (Contactless Wave, VISA logo, Masked Number, Expiry). Focused 100% on **Pure Balance Hierarchy**, **"Scan Me" QR Touch-Target**, and **Loyalty Perks**.</p>
+  </div>
+
+  <!-- Device Preview -->
+  <div class="preview-container">
+    
+    <!-- Pure Digital Wallet Card -->
+    <div class="wallet-card">
+      <div class="card-sheen"></div>
+
+      <!-- Top Row: HimoPay Brand Logo -->
+      <div class="card-top" style="margin-bottom: 16px;">
+        <div class="brand-group">
+          <!-- HimoPay Vector SVG -->
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none" style="vertical-align: middle;">
+            <path d="M10 10H30V40H49V60H30V90H10V10Z" fill="#FF5E14"/>
+            <path d="M49 10H69V40A10 10 0 0 1 69 60V90H49V60A10 10 0 0 1 49 40V10Z" fill="#FFFFFF"/>
+          </svg>
+          <span style="font-weight: 800; font-size: 17px; letter-spacing: -0.4px;">HimoPay</span>
+        </div>
+      </div>
+
+      <!-- Main 2-Column Section: Balance (Left) & Scan Me QR Square (Right) - Image 3 Layout -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+        <!-- Left: Balance & Eye -->
+        <div>
+          <div style="font-size: 12.5px; font-weight: 500; color: rgba(255, 255, 255, 0.68); margin-bottom: 6px;">Available Balance</div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="balance-val" id="balance-text" style="margin-bottom: 0; font-size: 28px; line-height: 1;">125,000 MMK</span>
+            <span class="eye-icon" onclick="toggleBalance()">
+              <svg id="eye-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: "Scan Me" Label + Dedicated Square QR Box (Image 3) -->
+        <div style="display: flex; flex-direction: column; align-items: center; cursor: pointer;" onclick="alert('Navigates to /my-qr (My Personal Receive QR Code)')">
+          <span style="font-size: 11.5px; font-weight: 600; color: rgba(255, 255, 255, 0.7); margin-bottom: 6px;">Scan Me</span>
+          <div style="width: 44px; height: 44px; background: rgba(255, 255, 255, 0.08); border: 1.2px solid rgba(255, 255, 255, 0.18); border-radius: 12px; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;">
+            <svg style="width: 22px; height: 22px; fill: #FFFFFF;" viewBox="0 0 24 24"><path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm8-2h7v7h-7V3zm2 2v3h3V5h-3zM3 13h7v7H3v-7zm2 2v3h3v-3H5zm13-2h3v2h-3v-2zm-5 0h2v4h-2v-4zm2 4h2v3h-2v-3zm3 1h2v2h-2v-2zm-3 2h5v2h-5v-2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loyalty & Rewards Strip -->
+      <div class="loyalty-strip">
+        <div class="loyalty-left">
+          <div class="star-icon">★</div>
+          <div>
+            <span class="tier-name">Member &nbsp;</span>
+            <span class="pts-bold">661 Points</span>
+          </div>
+        </div>
+        <div class="explore-btn" onclick="alert('Navigates to /tier-benefits (Himo Loyalty & Tier Rewards)')">
+          <span>Explore More</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Actions Dock -->
+    <div class="action-dock">
+      <div class="action-btn" onclick="alert('Navigates to /transfer-recipient')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 16l-4-4m0 0l4-4m-4 4h18m-4 8l4-4m0 0l-4-4m4 4H3"/></svg>
+        <span>Transfer</span>
+      </div>
+      <div class="action-btn" onclick="alert('Navigates to /cashin-methods')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16m-6-6l6 6 6-6"/></svg>
+        <span>Cash In</span>
+      </div>
+      <div class="action-btn" onclick="alert('Navigates to /cashout-methods')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 20V4m6 6l-6-6-6 6"/></svg>
+        <span>Cash Out</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Design Thinking Breakdown Grid -->
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Zero Artificial Clutter
+      </h3>
+      <p>Removed artificial physical card elements (NFC wave, VISA logo, masked number, expiry date) so the card represents a genuine digital account.</p>
+    </div>
+    <div class="feature-card">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        High-Value Utilities
+      </h3>
+      <p>Instant <strong>"Scan Me"</strong> personal QR touch-target in header, privacy eye toggle, and integrated <strong>Member Points badge</strong> with <strong>Explore More ›</strong>.</p>
+    </div>
+    <div class="feature-card">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+        High-Converting Actions
+      </h3>
+      <p>Retains the 3 primary financial actions (<code>Transfer</code>, <code>Cash In</code>, <code>Cash Out</code>) ergonomically docked right beneath the card.</p>
+    </div>
+  </div>
+
+  <script>
+    let isHidden = false;
+    function toggleBalance() {
+      isHidden = !isHidden;
+      const el = document.getElementById('balance-text');
+      const icon = document.getElementById('eye-icon-svg');
+      if (isHidden) {
+        el.innerText = '•••••••• MMK';
+        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+      } else {
+        el.innerText = '125,000 MMK';
+        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+      }
+    }
+  </script>
+</body>
+</html>
