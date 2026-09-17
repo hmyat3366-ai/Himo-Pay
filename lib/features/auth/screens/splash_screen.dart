@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/localization/app_strings.dart';
-import '../widgets/pixel_assembly_logo.dart';
+import '../../../core/storage/app_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,6 +13,9 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _glowAnimation;
   bool _navigated = false;
 
   @override
@@ -19,7 +23,26 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3200),
+      duration: const Duration(milliseconds: 2400),
+    );
+
+    _fadeAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+    );
+
+    _scaleAnimation = Tween<double>(begin: 0.82, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
+
+    _glowAnimation = Tween<double>(begin: 0.2, end: 0.8).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.3, 0.9, curve: Curves.easeInOut),
+      ),
     );
 
     _controller.forward();
@@ -34,7 +57,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   void _navigateNext() {
     if (_navigated || !mounted) return;
     _navigated = true;
-    Navigator.of(context).pushReplacementNamed('/login-phone');
+    final nextRoute = AppPreferences.isLoggedIn ? '/main' : '/login-phone';
+    Navigator.of(context).pushReplacementNamed(nextRoute);
   }
 
   void _replay() {
@@ -54,50 +78,128 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0C0E15), // Deep midnight navy-black matching video
+      backgroundColor: const Color(0xFF0D1117), // Matches native launch screen background
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: _navigateNext,
         child: Stack(
           children: [
-            // Subtle ambient background gradient
+            // 1. Subtle Ambient Radial Glow
             Positioned.fill(
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment(0, -0.05),
-                    radius: 0.85,
-                    colors: [
-                      Color(0x18FF5E14),
-                      Color(0x00000000),
-                    ],
-                  ),
-                ),
+              child: AnimatedBuilder(
+                animation: _glowAnimation,
+                builder: (context, child) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                        center: const Alignment(0, -0.1),
+                        radius: 0.9,
+                        colors: [
+                          const Color(0xFFFF5E14).withValues(alpha: 0.14 * _glowAnimation.value),
+                          const Color(0x00000000),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
 
-            // Center Logo with Pixel Assembly Animation
+            // 2. Centered Logo & Brand Wordmark
             Center(
-              child: PixelAssemblyLogo(
-                controller: _controller,
-                onComplete: _navigateNext,
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: ScaleTransition(
+                      scale: _scaleAnimation,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // App Icon Mark with soft shadow
+                          Container(
+                            width: 104,
+                            height: 104,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFF5E14),
+                              borderRadius: BorderRadius.circular(28),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFFFF5E14).withValues(alpha: 0.35 * _glowAnimation.value),
+                                  blurRadius: 28,
+                                  spreadRadius: 2,
+                                  offset: const Offset(0, 10),
+                                ),
+                              ],
+                            ),
+                            padding: const EdgeInsets.all(20),
+                            child: Image.asset(
+                              'assets/images/himo_logo_white.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+
+                          const SizedBox(height: 28),
+
+                          // Brand Wordmark
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'HIMO',
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 3.5,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'PAY',
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 3.5,
+                                  color: const Color(0xFFFF5E14),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          // Subtitle Tagline
+                          Text(
+                            'FAST · SECURE · MODERN PAYMENTS',
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 2.2,
+                              color: AppColors.gray400.withValues(alpha: 0.8),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
 
-            // Top Bar with subtle replay & skip controls
+            // 3. Top Skip Bar
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Replay button (discreet, for testing / user review)
                     IconButton(
                       icon: const Icon(Icons.refresh_rounded, color: AppColors.gray500, size: 20),
                       tooltip: 'Replay Animation',
                       onPressed: _replay,
                     ),
-                    // Skip button
                     TextButton(
                       onPressed: _navigateNext,
                       child: Text(
@@ -114,7 +216,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               ),
             ),
 
-            // Bottom subtle loading / progress bar
+            // 4. Sleek Bottom Progress Bar
             Positioned(
               left: 0,
               right: 0,

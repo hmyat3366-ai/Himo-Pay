@@ -47,7 +47,7 @@ class HimoPayApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: themeMode,
-              initialRoute: AppPreferences.isLoggedIn ? '/main' : '/login-phone',
+              initialRoute: '/splash',
               onGenerateRoute: (settings) => AppRouter.generateRoute(
                 settings,
                 onToggleTheme: AppPreferences.toggleTheme,

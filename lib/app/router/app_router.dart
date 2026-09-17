@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/storage/app_preferences.dart';
+import '../../features/auth/screens/splash_screen.dart';
 import '../../features/auth/screens/campaign_screen.dart';
 import '../../features/auth/screens/login_phone_screen.dart';
 import '../../features/auth/screens/login_otp_screen.dart';
@@ -100,7 +101,8 @@ class AppRouter {
     final routeName = settings.name ?? '';
 
     // Auth & onboarding route whitelist
-    final isAuthRoute = routeName == '/login' ||
+    final isAuthRoute = routeName == '/splash' ||
+        routeName == '/login' ||
         routeName == '/login-phone' ||
         routeName == '/signup' ||
         routeName == '/signup-phone' ||
@@ -127,7 +129,10 @@ class AppRouter {
 
     Widget page;
     switch (settings.name) {
-      // Auth & Onboarding
+      // Splash & Auth & Onboarding
+      case '/splash':
+        page = const SplashScreen();
+        break;
       case '':
       case '/':
       case '/login':
