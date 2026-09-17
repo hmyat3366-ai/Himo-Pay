@@ -22,6 +22,23 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final HimoRepository _repo = HimoRepository();
 
+  @override
+  void initState() {
+    super.initState();
+    _repo.walletNotifier.addListener(_onProfileChanged);
+    _repo.fetchFromSupabase();
+  }
+
+  void _onProfileChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _repo.walletNotifier.removeListener(_onProfileChanged);
+    super.dispose();
+  }
+
   void _confirmLogout() {
     showDialog(
       context: context,
@@ -98,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Text(user.name.toUpperCase(), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, letterSpacing: -0.2), overflow: TextOverflow.ellipsis),
                         const SizedBox(height: 2),
-                        Text('*******${user.phone.substring(user.phone.length - 4)}', style: const TextStyle(fontSize: 13, color: AppColors.gray500, fontWeight: FontWeight.w500)),
+                        Text(user.maskedPhone, style: const TextStyle(fontSize: 13, color: AppColors.gray500, fontWeight: FontWeight.w500)),
                         const SizedBox(height: 2),
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,

@@ -117,7 +117,11 @@ class _KycIdentityScreenState extends State<KycIdentityScreen> {
               HimoButton(
                 text: 'Next: Upload Documents',
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/kyc-verify');
+                  final args = ModalRoute.of(context)?.settings.arguments;
+                  Navigator.of(context).pushNamed(
+                    '/kyc-verify',
+                    arguments: args,
+                  );
                 },
               ),
               const SizedBox(height: AppSpacing.md),

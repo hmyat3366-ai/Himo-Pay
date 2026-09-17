@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _repo.walletNotifier.addListener(_onWalletDataChanged);
     _repo.transactionsNotifier.addListener(_onWalletDataChanged);
+    _repo.fetchFromSupabase();
   }
 
   void _onWalletDataChanged() {
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _onRefresh() async {
     AppPreferences.triggerHaptic(HapticType.light);
-    await Future.delayed(const Duration(milliseconds: 700));
+    await _repo.fetchFromSupabase();
     if (mounted) {
       setState(() {});
       HimoToast.show(context, 'Wallet updated'.tr('ပိုက်ဆံအိတ် အချက်အလက် အသစ်ရရှိပါပြီ'));

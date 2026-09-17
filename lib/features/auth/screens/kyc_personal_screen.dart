@@ -85,7 +85,19 @@ class _KycPersonalScreenState extends State<KycPersonalScreen> {
               HimoButton(
                 text: 'Next: Identity Documents',
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/kyc-identity');
+                  final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+                  final phone = args?['phone']?.toString() ?? '09950786548';
+                  final name = _nameController.text.trim();
+                  Navigator.of(context).pushNamed(
+                    '/kyc-identity',
+                    arguments: {
+                      'phone': phone,
+                      'name': name.isNotEmpty ? name : 'HTET MYAT OO',
+                      'nrc': _nrcController.text.trim(),
+                      'dob': _dobController.text.trim(),
+                      'gender': _selectedGender,
+                    },
+                  );
                 },
               ),
               const SizedBox(height: AppSpacing.lg),

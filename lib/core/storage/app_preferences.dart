@@ -9,6 +9,9 @@ class AppPreferences {
   static const String _keyAutoReceipt = 'app_auto_receipt';
   static const String _keyBalanceHidden = 'app_balance_hidden';
   static const String _keyIsLoggedIn = 'app_is_logged_in';
+  static const String _keyActiveUserId = 'app_active_user_id';
+  static const String _keyActivePhone = 'app_active_phone';
+  static const String _keyActiveName = 'app_active_name';
 
   static late SharedPreferences _prefs;
 
@@ -18,10 +21,26 @@ class AppPreferences {
   static final ValueNotifier<bool> autoReceiptNotifier = ValueNotifier<bool>(true);
   static final ValueNotifier<bool> balanceHiddenNotifier = ValueNotifier<bool>(false);
   static final ValueNotifier<bool> isLoggedInNotifier = ValueNotifier<bool>(false);
+  static final ValueNotifier<String?> activeUserIdNotifier = ValueNotifier<String?>(null);
 
   static bool get isDark => themeModeNotifier.value == ThemeMode.dark;
   static bool get isMyanmar => localeNotifier.value == 'my';
   static bool get isLoggedIn => isLoggedInNotifier.value;
+  static String? get activeUserId => activeUserIdNotifier.value;
+  static String? get activePhone {
+    try {
+      return _prefs.getString(_keyActivePhone);
+    } catch (_) {
+      return null;
+    }
+  }
+  static String? get activeName {
+    try {
+      return _prefs.getString(_keyActiveName);
+    } catch (_) {
+      return null;
+    }
+  }
 
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -43,8 +62,9 @@ class AppPreferences {
     // 5. Restore Balance Hidden
     balanceHiddenNotifier.value = _prefs.getBool(_keyBalanceHidden) ?? false;
 
-    // 6. Restore Logged In State (defaults to false for authentication gate)
+    // 6. Restore Logged In State & Active User
     isLoggedInNotifier.value = _prefs.getBool(_keyIsLoggedIn) ?? false;
+    activeUserIdNotifier.value = _prefs.getString(_keyActiveUserId);
   }
 
   // ── Setters with Storage Persistence ──
@@ -97,6 +117,22 @@ class AppPreferences {
   static Future<void> setLoggedIn(bool val) async {
     isLoggedInNotifier.value = val;
     await _prefs.setBool(_keyIsLoggedIn, val);
+  }
+
+  static Future<void> setActiveUser(String userId, {String? phone, String? name}) async {
+    activeUserIdNotifier.value = userId;
+    await _prefs.setString(_keyActiveUserId, userId);
+    if (phone != null) await _prefs.setString(_keyActivePhone, phone);
+    if (name != null) await _prefs.setString(_keyActiveName, name);
+  }
+
+  static Future<void> clearSession() async {
+    isLoggedInNotifier.value = false;
+    activeUserIdNotifier.value = null;
+    await _prefs.setBool(_keyIsLoggedIn, false);
+    await _prefs.remove(_keyActiveUserId);
+    await _prefs.remove(_keyActivePhone);
+    await _prefs.remove(_keyActiveName);
   }
 
   // ── Unified Haptic Feedback Service ──

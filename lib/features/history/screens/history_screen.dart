@@ -25,6 +25,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   void initState() {
     super.initState();
     _repo.transactionsNotifier.addListener(_onTransactionsChanged);
+    _repo.fetchFromSupabase();
   }
 
   void _onTransactionsChanged() {
@@ -40,7 +41,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   Future<void> _onRefresh() async {
     AppPreferences.triggerHaptic(HapticType.light);
-    await Future.delayed(const Duration(milliseconds: 650));
+    await _repo.fetchFromSupabase();
     if (mounted) {
       setState(() {});
       HimoToast.show(context, 'History updated'.tr('မှတ်တမ်းများ အသစ်ရရှိပါပြီ'));

@@ -4,6 +4,7 @@ import '../../../core/widgets/himo_app_bar.dart';
 import '../../../core/widgets/himo_card.dart';
 import '../../../core/widgets/himo_toast.dart';
 import '../../../core/localization/app_strings.dart';
+import '../../../data/repositories/himo_repository.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -13,7 +14,25 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
+  final HimoRepository _repo = HimoRepository();
   int _selectedTab = 0; // 0: All, 1: Payments, 2: Security, 3: Rewards
+
+  @override
+  void initState() {
+    super.initState();
+    _repo.notificationsNotifier.addListener(_onNotifsChanged);
+    _repo.fetchFromSupabase();
+  }
+
+  void _onNotifsChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _repo.notificationsNotifier.removeListener(_onNotifsChanged);
+    super.dispose();
+  }
 
   final List<Map<String, dynamic>> _notifications = [
     {
@@ -91,7 +110,24 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final filtered = _notifications.where((n) {
+    final repoNotifs = _repo.getNotifications().map((n) => {
+      'title': n.title,
+      'title_my': n.title,
+      'body': n.body,
+      'body_my': n.body,
+      'time': n.time,
+      'time_my': n.time,
+      'category': n.category,
+      'isUnread': !n.isRead,
+      'icon': n.type == 'money_received'
+          ? Icons.arrow_downward_rounded
+          : Icons.arrow_upward_rounded,
+      'color': n.type == 'money_received' ? AppColors.success : AppColors.primary,
+    }).toList();
+
+    final allNotifs = [...repoNotifs, ..._notifications];
+
+    final filtered = allNotifs.where((n) {
       if (_selectedTab == 1) return n['category'] == 'Payments';
       if (_selectedTab == 2) return n['category'] == 'Security';
       if (_selectedTab == 3) return n['category'] == 'Rewards';
@@ -131,19 +167,31 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             ),
             const SizedBox(height: 8),
             Expanded(
-              child: filtered.isEmpty
-                  ? Center(
-                      child: Text(
-                        'No notifications yet'.tr('အသိပေးချက် မရှိသေးပါ'),
-                        style: const TextStyle(fontSize: 14, color: AppColors.gray500),
-                      ),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                      itemCount: filtered.length,
-                      itemBuilder: (context, i) {
-                        final notif = filtered[i];
-                        final isUnread = notif['isUnread'] as bool;
+              child: RefreshIndicator(
+                color: AppColors.primary,
+                onRefresh: () async {
+                  await _repo.fetchFromSupabase();
+                  if (mounted) setState(() {});
+                },
+                child: filtered.isEmpty
+                    ? ListView(
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height * 0.3),
+                          Center(
+                            child: Text(
+                              'No notifications yet'.tr('အသိပေးချက် မရှိသေးပါ'),
+                              style: const TextStyle(fontSize: 14, color: AppColors.gray500),
+                            ),
+                          ),
+                        ],
+                      )
+                    : ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                        itemCount: filtered.length,
+                        itemBuilder: (context, i) {
+                          final notif = filtered[i];
+                          final isUnread = notif['isUnread'] as bool;
                         final title = (notif['title'] as String).tr(notif['title_my'] as String);
                         final body = (notif['body'] as String).tr(notif['body_my'] as String);
                         final time = (notif['time'] as String).tr(notif['time_my'] as String);
@@ -215,6 +263,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         );
                       },
                     ),
+              ),
             ),
           ],
         ),

@@ -37,7 +37,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   Future<void> _onRefresh() async {
     AppPreferences.triggerHaptic(HapticType.light);
-    await Future.delayed(const Duration(milliseconds: 650));
+    await _repo.fetchFromSupabase();
     if (mounted) {
       setState(() {});
       HimoToast.show(context, 'Wallet refreshed'.tr('ပိုက်ဆံအိတ် အသစ်ရရှိပါပြီ'));

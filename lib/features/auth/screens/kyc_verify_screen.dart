@@ -96,7 +96,11 @@ class _KycVerifyScreenState extends State<KycVerifyScreen> {
               HimoButton(
                 text: 'Confirm & Continue',
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/create-passcode');
+                  final args = ModalRoute.of(context)?.settings.arguments;
+                  Navigator.of(context).pushNamed(
+                    '/create-passcode',
+                    arguments: args,
+                  );
                 },
               ),
               const SizedBox(height: AppSpacing.md),

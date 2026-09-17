@@ -5,6 +5,7 @@ import 'app/theme/app_theme.dart';
 import 'app/router/app_router.dart';
 import 'core/storage/app_preferences.dart';
 import 'core/supabase/supabase_config.dart';
+import 'data/repositories/himo_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,10 @@ void main() async {
   );
 
   await AppPreferences.init();
+  if (AppPreferences.isLoggedIn && AppPreferences.activeUserId != null) {
+    HimoRepository().setActiveUserId(AppPreferences.activeUserId!);
+  }
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -42,7 +47,7 @@ class HimoPayApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: themeMode,
-              initialRoute: '/login-phone',
+              initialRoute: AppPreferences.isLoggedIn ? '/main' : '/login-phone',
               onGenerateRoute: (settings) => AppRouter.generateRoute(
                 settings,
                 onToggleTheme: AppPreferences.toggleTheme,

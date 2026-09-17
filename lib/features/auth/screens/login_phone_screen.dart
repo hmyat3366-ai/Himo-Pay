@@ -18,13 +18,149 @@ class LoginPhoneScreen extends StatefulWidget {
 }
 
 class _LoginPhoneScreenState extends State<LoginPhoneScreen> {
-  final TextEditingController _phoneController = TextEditingController(text: '950786548');
+  late final TextEditingController _phoneController;
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final savedPhone = AppPreferences.activePhone;
+    if (savedPhone != null && savedPhone.isNotEmpty) {
+      final digits = savedPhone.replaceAll(RegExp(r'\D'), '');
+      _phoneController = TextEditingController(
+        text: digits.startsWith('09') ? digits.substring(2) : digits,
+      );
+    } else {
+      _phoneController = TextEditingController(text: '123456789');
+    }
+  }
 
   @override
   void dispose() {
     _phoneController.dispose();
     super.dispose();
+  }
+
+  void _showDemoAccountsModal(bool isDark) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: isDark ? AppColors.surfaceElevatedDark : Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Select Demo Account'.tr('စမ်းသပ်အကောင့် ရွေးချယ်ပါ'),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: isDark ? Colors.white : AppColors.gray900,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(ctx),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                _buildDemoUserTile(
+                  name: 'Min Khant',
+                  phone: '09 123 456 789',
+                  balance: '1,250,000 MMK',
+                  userId: 'user-min-khant',
+                  isDark: isDark,
+                  onSelect: () => _loginAsDemo(ctx, 'user-min-khant'),
+                ),
+                const SizedBox(height: 10),
+                _buildDemoUserTile(
+                  name: 'Aung Aung',
+                  phone: '09 987 654 321',
+                  balance: '500,000 MMK',
+                  userId: 'user-aung-aung',
+                  isDark: isDark,
+                  onSelect: () => _loginAsDemo(ctx, 'user-aung-aung'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildDemoUserTile({
+    required String name,
+    required String phone,
+    required String balance,
+    required String userId,
+    required bool isDark,
+    required VoidCallback onSelect,
+  }) {
+    return InkWell(
+      onTap: onSelect,
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.surfaceCardDark : AppColors.gray100,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: isDark ? Colors.white.withOpacity(0.08) : AppColors.gray200,
+          ),
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: AppColors.primary.withOpacity(0.15),
+              child: Text(
+                name[0],
+                style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryDark),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text(phone, style: const TextStyle(color: AppColors.gray500, fontSize: 13)),
+                ],
+              ),
+            ),
+            Text(balance, style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.primaryDark)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _loginAsDemo(BuildContext modalCtx, String userId) async {
+    Navigator.pop(modalCtx);
+    setState(() => _isLoading = true);
+    try {
+      await AuthService.signInAsDemo(demoUserId: userId);
+      if (mounted) {
+        HimoToast.show(context, 'Login successful!'.tr('အကောင့်ဝင်ရောက်မှု အောင်မြင်ပါသည်'));
+        Navigator.of(context).pushNamedAndRemoveUntil('/main', (r) => false);
+      }
+    } catch (e) {
+      if (mounted) {
+        HimoToast.show(context, 'Demo login error: $e');
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -173,23 +309,69 @@ class _LoginPhoneScreenState extends State<LoginPhoneScreen> {
                             onPressed: _isLoading
                                 ? null
                                 : () async {
-                                    final phone = _phoneController.text.trim();
-                                    if (phone.isEmpty) {
+                                    final raw = _phoneController.text.trim();
+                                    if (raw.isEmpty) {
                                       HimoToast.show(context, 'Please enter your phone number'.tr('ဖုန်းနံပါတ်ထည့်ပါ'));
                                       return;
                                     }
                                     setState(() => _isLoading = true);
                                     try {
-                                      await AuthService.sendOtp(phone);
-                                      if (context.mounted) {
+                                      final profile = await AuthService.lookupUserByPhone(raw);
+                                      if (!mounted) return;
+                                      if (profile != null) {
                                         Navigator.of(context).pushNamed(
-                                          '/login-otp',
-                                          arguments: {'phone': phone},
+                                          '/login-passcode',
+                                          arguments: {
+                                            'phone': profile['phone']?.toString() ?? raw,
+                                            'name': profile['name']?.toString() ?? 'Himo User',
+                                            'id': profile['id']?.toString() ?? '',
+                                          },
+                                        );
+                                      } else {
+                                        // Account not found - offer to sign up
+                                        showDialog(
+                                          context: context,
+                                          builder: (ctx) => AlertDialog(
+                                            backgroundColor: isDark ? AppColors.surfaceElevatedDark : Colors.white,
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                            title: Text(
+                                              'Account Not Found'.tr('အကောင့်မတွေ့ပါ'),
+                                              style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : Colors.black),
+                                            ),
+                                            content: Text(
+                                              'This phone number ($raw) is not registered yet. Would you like to create a new account?'
+                                                  .tr('ဤဖုန်းနံပါတ်ဖြင့် အကောင့်ဖွင့်ထားခြင်း မရှိသေးပါ။ အကောင့်အသစ် ဖွင့်လိုပါသလား?'),
+                                              style: const TextStyle(fontSize: 14),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(ctx),
+                                                child: Text('Cancel'.tr('မလုပ်တော့ပါ')),
+                                              ),
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: AppColors.primary,
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.pop(ctx);
+                                                  Navigator.of(context).pushNamed(
+                                                    '/signup-phone',
+                                                    arguments: {'phone': raw},
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'Sign Up'.tr('အကောင့်ဖွင့်မည်'),
+                                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       }
                                     } catch (e) {
-                                      if (context.mounted) {
-                                        HimoToast.show(context, 'Failed to send OTP. Try Demo Login.'.tr('OTP မပေးပို့နိုင်ပါ'));
+                                      if (mounted) {
+                                        HimoToast.show(context, 'Network error: $e');
                                       }
                                     } finally {
                                       if (mounted) setState(() => _isLoading = false);
@@ -205,13 +387,7 @@ class _LoginPhoneScreenState extends State<LoginPhoneScreen> {
                               side: BorderSide(color: AppColors.primary.withOpacity(0.5)),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                             ),
-                            onPressed: () async {
-                              await AuthService.signInAsDemo();
-                              if (context.mounted) {
-                                HimoToast.show(context, 'Welcome to Himo Pay Demo!'.tr('Himo Pay စမ်းသပ်ဗားရှင်းမှ ကြိုဆိုပါသည်'));
-                                Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
-                              }
-                            },
+                            onPressed: () => _showDemoAccountsModal(isDark),
                             icon: const Icon(Icons.flash_on_rounded, color: AppColors.primary, size: 20),
                             label: Text(
                               'Quick Demo Login'.tr('အစမ်းအကောင့်ဖြင့် ချက်ချင်းဝင်မည်'),

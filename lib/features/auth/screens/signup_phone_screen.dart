@@ -185,7 +185,14 @@ class _SignupPhoneScreenState extends State<SignupPhoneScreen> {
                           HimoButton(
                             text: 'Next'.tr('ရှေ့သို့'),
                             onPressed: () {
-                              Navigator.of(context).pushNamed('/kyc-personal');
+                              final raw = _phoneController.text.trim();
+                              final phone = raw.startsWith('09')
+                                  ? raw
+                                  : (raw.startsWith('+') ? raw : '09$raw');
+                              Navigator.of(context).pushNamed(
+                                '/kyc-personal',
+                                arguments: {'phone': phone.isNotEmpty ? phone : '09950786548'},
+                              );
                             },
                           ),
                           const SizedBox(height: AppSpacing.md),
