@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _repo.walletNotifier.addListener(_onWalletDataChanged);
     _repo.transactionsNotifier.addListener(_onWalletDataChanged);
+    _repo.userNotifier.addListener(_onWalletDataChanged);
     _repo.fetchFromSupabase();
   }
 
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _repo.walletNotifier.removeListener(_onWalletDataChanged);
     _repo.transactionsNotifier.removeListener(_onWalletDataChanged);
+    _repo.userNotifier.removeListener(_onWalletDataChanged);
     super.dispose();
   }
 
@@ -744,7 +746,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           // Transaction Rows
-          ...List.generate(list.length, (index) {
+          if (list.isEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 28),
+              child: Center(
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.receipt_long_outlined,
+                      size: 36,
+                      color: isDark ? AppColors.gray600 : AppColors.gray400,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'No recent transactions'.tr('မကြာသေးမီက မှတ်တမ်း မရှိသေးပါ'),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: isDark ? AppColors.gray400 : AppColors.gray500,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else
+            ...List.generate(list.length, (index) {
             final tx = list[index];
             final isIncome = tx.isIncome;
             final isLast = index == list.length - 1;

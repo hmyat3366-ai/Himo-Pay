@@ -4,6 +4,7 @@ import '../../../core/constants/app_radius.dart';
 import '../../../core/widgets/himo_app_bar.dart';
 import '../../../core/widgets/himo_toast.dart';
 import '../../../core/localization/app_strings.dart';
+import '../../../data/repositories/himo_repository.dart';
 
 class PersonalInformationScreen extends StatefulWidget {
   const PersonalInformationScreen({super.key});
@@ -13,10 +14,10 @@ class PersonalInformationScreen extends StatefulWidget {
 }
 
 class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
-  // User Profile Data matching Image 2
-  final String _name = 'HTET MYAT OO';
-  final String _phone = '09950786548';
-  final String _userLevel = 'Subscriber Level 2';
+  // User Profile Data
+  late String _name;
+  late String _phone;
+  late String _userLevel;
   final String _userRank = 'Member';
   final String _gender = 'Male';
   final String _dob = '02/11/2002';
@@ -30,6 +31,15 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   String _district = 'Yangon(East)';
   String _township = 'NorthOkkalapa';
   String _addressDetail = 'No30 Anawyahtar Str A Nan Pin';
+
+  @override
+  void initState() {
+    super.initState();
+    final user = HimoRepository().currentUser;
+    _name = user.name;
+    _phone = user.phone.isNotEmpty ? user.phone : '09950786548';
+    _userLevel = user.tier;
+  }
 
   void _editOccupationModal() {
     final controller = TextEditingController(text: _occupation == '-' ? '' : _occupation);

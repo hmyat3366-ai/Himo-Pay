@@ -25,6 +25,7 @@ class HimoRepository {
   final List<VoucherModel> _vouchers = List.from(MockData.vouchers);
   final List<TicketModel> _tickets = List.from(MockData.tickets);
 
+  late final ValueNotifier<UserModel> userNotifier;
   late final ValueNotifier<WalletModel> walletNotifier;
   late final ValueNotifier<List<TransactionModel>> transactionsNotifier;
   late final ValueNotifier<List<NotificationModel>> notificationsNotifier;
@@ -45,11 +46,25 @@ class HimoRepository {
     if (authUser != null && authUser.id.isNotEmpty) {
       return authUser.id;
     }
-    return 'user-min-khant';
+    return 'user-htet-myat-oo';
   }
 
   void setActiveUserId(String id) {
     _activeCustomUserId = id;
+    final savedName = AppPreferences.activeName;
+    final savedPhone = AppPreferences.activePhone;
+    if (savedName != null && savedName.isNotEmpty) {
+      _user = _user.copyWith(
+        id: id,
+        name: savedName,
+        phone: savedPhone ?? _user.phone,
+      );
+      userNotifier.value = _user;
+    }
+    _transactions.clear();
+    _notifications.clear();
+    transactionsNotifier.value = [];
+    notificationsNotifier.value = [];
     fetchFromSupabase();
   }
 
@@ -57,8 +72,18 @@ class HimoRepository {
     final savedId = AppPreferences.activeUserId;
     if (savedId != null && savedId.isNotEmpty) {
       _activeCustomUserId = savedId;
+      final savedName = AppPreferences.activeName;
+      final savedPhone = AppPreferences.activePhone;
+      if (savedName != null && savedName.isNotEmpty) {
+        _user = _user.copyWith(
+          id: savedId,
+          name: savedName,
+          phone: savedPhone ?? _user.phone,
+        );
+      }
     }
 
+    userNotifier = ValueNotifier<UserModel>(_user);
     _wallet = MockData.initialWallet.copyWith(
       isBalanceHidden: AppPreferences.balanceHiddenNotifier.value,
     );
@@ -114,6 +139,7 @@ class HimoRepository {
 
       if (profile != null) {
         _user = UserModel.fromJson(profile);
+        userNotifier.value = _user;
         final balVal = profile['balance'];
         final parsedBal = balVal is num
             ? balVal.toInt()
@@ -129,7 +155,7 @@ class HimoRepository {
           .eq('user_id', uid)
           .order('created_at', ascending: false);
 
-      if (txRows is List && txRows.isNotEmpty) {
+      if (txRows is List) {
         _transactions.clear();
         for (final row in txRows) {
           _transactions.add(TransactionModel.fromJson(row as Map<String, dynamic>));
@@ -144,7 +170,7 @@ class HimoRepository {
           .eq('user_id', uid)
           .order('created_at', ascending: false);
 
-      if (notifRows is List && notifRows.isNotEmpty) {
+      if (notifRows is List) {
         _notifications.clear();
         for (final row in notifRows) {
           _notifications.add(NotificationModel.fromJson(row as Map<String, dynamic>));

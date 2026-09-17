@@ -125,7 +125,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       'color': n.type == 'money_received' ? AppColors.success : AppColors.primary,
     }).toList();
 
-    final allNotifs = [...repoNotifs, ..._notifications];
+    final allNotifs = repoNotifs.isNotEmpty ? repoNotifs : _notifications;
 
     final filtered = allNotifs.where((n) {
       if (_selectedTab == 1) return n['category'] == 'Payments';

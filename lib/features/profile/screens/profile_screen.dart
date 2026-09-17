@@ -26,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _repo.walletNotifier.addListener(_onProfileChanged);
+    _repo.userNotifier.addListener(_onProfileChanged);
     _repo.fetchFromSupabase();
   }
 
@@ -36,6 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void dispose() {
     _repo.walletNotifier.removeListener(_onProfileChanged);
+    _repo.userNotifier.removeListener(_onProfileChanged);
     super.dispose();
   }
 

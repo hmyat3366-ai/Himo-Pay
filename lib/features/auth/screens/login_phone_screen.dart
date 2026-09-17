@@ -75,6 +75,15 @@ class _LoginPhoneScreenState extends State<LoginPhoneScreen> {
                 ),
                 const SizedBox(height: 12),
                 _buildDemoUserTile(
+                  name: 'HTET MYAT OO',
+                  phone: '09 950 786 548',
+                  balance: '2,500,000 MMK',
+                  userId: 'user-htet-myat-oo',
+                  isDark: isDark,
+                  onSelect: () => _loginAsDemo(ctx, 'user-htet-myat-oo'),
+                ),
+                const SizedBox(height: 10),
+                _buildDemoUserTile(
                   name: 'Min Khant',
                   phone: '09 123 456 789',
                   balance: '1,250,000 MMK',
