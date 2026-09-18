@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/localization/app_strings.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/widgets/himo_app_bar.dart';
 import '../../../core/widgets/himo_card.dart';
@@ -44,12 +43,12 @@ class _SecurityPrivacyScreenState extends State<SecurityPrivacyScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: HimoAppBar(title: 'Security & Privacy'.tr('လုံခြုံရေးနှင့် ကိုယ်ရေးအချက်အလက်')),
+      appBar: const HimoAppBar(title: 'Security & Privacy'),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           children: [
-            Text('AUTHENTICATION & PASSCODE'.tr('လုံခြုံရေးနှင့် လျှို့ဝှက်ကုဒ်'), style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gray500, letterSpacing: 0.5)),
+            const Text('AUTHENTICATION & PASSCODE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gray500, letterSpacing: 0.5)),
             const SizedBox(height: 10),
             HimoCard(
               padding: EdgeInsets.zero,
@@ -57,17 +56,17 @@ class _SecurityPrivacyScreenState extends State<SecurityPrivacyScreen> {
                 children: [
                   ListTile(
                     leading: const Icon(Icons.lock_reset_rounded, color: AppColors.primaryGold),
-                    title: Text('Change 6-Digit Passcode'.tr('ဂဏန်း ၆ လုံး လျှို့ဝှက်ကုဒ် ပြောင်းမည်'), style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    title: const Text('Change 6-Digit Passcode', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     trailing: const Icon(Icons.chevron_right, size: 18),
                     onTap: _promptChangePasscode,
                   ),
                   Divider(height: 1, color: isDark ? AppColors.borderDark : AppColors.gray200),
                   SwitchListTile(
                     secondary: const Icon(Icons.fingerprint_rounded, color: AppColors.primaryGold),
-                    title: Text('FaceID / Fingerprint Login'.tr('FaceID / လက်ဗွေဖြင့် ဝင်ရောက်မည်'), style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    title: const Text('FaceID / Fingerprint Login', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     subtitle: const Text('Quick authentication for transfers and unlock', style: TextStyle(fontSize: 11, color: AppColors.gray500)),
                     value: _biometricEnabled,
-                    activeColor: AppColors.primaryGold,
+                    activeThumbColor: AppColors.primaryGold,
                     onChanged: (val) {
                       setState(() => _biometricEnabled = val);
                       HimoToast.show(context, val ? 'Biometrics enabled' : 'Biometrics disabled');
@@ -79,7 +78,7 @@ class _SecurityPrivacyScreenState extends State<SecurityPrivacyScreen> {
                     title: const Text('Two-Factor Authentication (2FA)', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     subtitle: const Text('SMS OTP verification for unusual activities', style: TextStyle(fontSize: 11, color: AppColors.gray500)),
                     value: _twoFactor,
-                    activeColor: AppColors.primaryGold,
+                    activeThumbColor: AppColors.primaryGold,
                     onChanged: (val) => setState(() => _twoFactor = val),
                   ),
                 ],
@@ -96,7 +95,7 @@ class _SecurityPrivacyScreenState extends State<SecurityPrivacyScreen> {
                     secondary: const Icon(Icons.visibility_off_outlined, color: AppColors.primaryGold),
                     title: const Text('Hide Balances in Screen Share', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     value: _hideBalanceRecorder,
-                    activeColor: AppColors.primaryGold,
+                    activeThumbColor: AppColors.primaryGold,
                     onChanged: (val) => setState(() => _hideBalanceRecorder = val),
                   ),
                   Divider(height: 1, color: isDark ? AppColors.borderDark : AppColors.gray200),
@@ -104,7 +103,7 @@ class _SecurityPrivacyScreenState extends State<SecurityPrivacyScreen> {
                     secondary: const Icon(Icons.screenshot_outlined, color: AppColors.primaryGold),
                     title: const Text('Block In-App Screenshots', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     value: _blockScreenshots,
-                    activeColor: AppColors.primaryGold,
+                    activeThumbColor: AppColors.primaryGold,
                     onChanged: (val) => setState(() => _blockScreenshots = val),
                   ),
                 ],
@@ -132,7 +131,7 @@ class _SecurityPrivacyScreenState extends State<SecurityPrivacyScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: AppColors.success.withOpacity(0.15),
+                      color: AppColors.success.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Text('CURRENT', style: TextStyle(color: AppColors.success, fontSize: 10, fontWeight: FontWeight.w800)),

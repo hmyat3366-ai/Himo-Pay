@@ -69,19 +69,58 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.getElementById('mobile-menu-toggle');
   const navLinks = document.getElementById('nav-links');
 
+  function openMobileMenu() {
+    if (mobileToggle) {
+      mobileToggle.classList.add('is-open');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+    }
+    if (navLinks) {
+      navLinks.classList.add('is-open');
+    }
+    document.body.classList.add('menu-open');
+  }
+
+  function closeMobileMenu() {
+    if (mobileToggle) {
+      mobileToggle.classList.remove('is-open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    }
+    if (navLinks) {
+      navLinks.classList.remove('is-open');
+    }
+    document.body.classList.remove('menu-open');
+  }
+
   if (mobileToggle && navLinks) {
-    mobileToggle.addEventListener('click', () => {
-      const isShowing = navLinks.style.display === 'flex';
-      navLinks.style.display = isShowing ? 'none' : 'flex';
-      if (!isShowing) {
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '76px';
-        navLinks.style.left = '0';
-        navLinks.style.right = '0';
-        navLinks.style.background = 'white';
-        navLinks.style.padding = '24px';
-        navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navLinks.classList.contains('is-open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // Close menu when clicking any nav link
+    const menuLinks = navLinks.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('is-open') && !navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Reset when resizing window to desktop/laptop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 899 && navLinks.classList.contains('is-open')) {
+        closeMobileMenu();
       }
     });
   }

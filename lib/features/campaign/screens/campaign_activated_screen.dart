@@ -20,7 +20,7 @@ class CampaignActivatedScreen extends StatelessWidget {
                 height: 90,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primaryGold.withOpacity(0.15),
+                  color: AppColors.primaryGold.withValues(alpha: 0.15),
                   border: Border.all(color: AppColors.primaryGold, width: 2),
                 ),
                 child: const Icon(Icons.bolt_rounded, color: AppColors.primaryGold, size: 52),
@@ -42,7 +42,7 @@ class CampaignActivatedScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xFF1A1A1A),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.primaryGold.withOpacity(0.3)),
+                  border: Border.all(color: AppColors.primaryGold.withValues(alpha: 0.3)),
                 ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,

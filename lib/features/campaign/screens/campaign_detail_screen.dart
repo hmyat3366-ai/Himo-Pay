@@ -31,7 +31,7 @@ class CampaignDetailScreen extends StatelessWidget {
                     height: 180,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: AppColors.primaryGold.withOpacity(0.3)),
+                      border: Border.all(color: AppColors.primaryGold.withValues(alpha: 0.3)),
                       image: const DecorationImage(
                         image: AssetImage('assets/images/event_visual_rewards.jpg'),
                         fit: BoxFit.cover,

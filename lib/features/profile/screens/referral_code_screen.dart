@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/localization/app_strings.dart';
 import 'package:flutter/services.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/widgets/himo_app_bar.dart';
@@ -16,7 +15,7 @@ class ReferralCodeScreen extends StatelessWidget {
     const referralCode = 'HIMO-VIP-7865';
 
     return Scaffold(
-      appBar: HimoAppBar(title: 'Invite & Earn'.tr('မိတ်ဆက်ပြီး ဆုယူမည်')),
+      appBar: const HimoAppBar(title: 'Invite & Earn'),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -30,13 +29,13 @@ class ReferralCodeScreen extends StatelessWidget {
                     height: 56,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.primaryGold.withOpacity(0.15),
+                      color: AppColors.primaryGold.withValues(alpha: 0.15),
                     ),
                     child: const Icon(Icons.card_giftcard_rounded, color: AppColors.primaryGold, size: 28),
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    'Invite Friends, Earn Cash'.tr('သူငယ်ချင်းများကို ဖိတ်ခေါ်ပြီး ငွေသားဆု ရယူပါ'),
+                  const Text(
+                    'Invite Friends, Earn Cash',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 6),
@@ -52,7 +51,7 @@ class ReferralCodeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isDark ? AppColors.surfaceDark : AppColors.gray100,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.primaryGold.withOpacity(0.5)),
+                      border: Border.all(color: AppColors.primaryGold.withValues(alpha: 0.5)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +65,7 @@ class ReferralCodeScreen extends StatelessWidget {
                           icon: const Icon(Icons.copy_rounded, color: AppColors.primaryGold, size: 20),
                           onPressed: () {
                             Clipboard.setData(const ClipboardData(text: referralCode));
-                            HimoToast.show(context, 'Referral code copied to clipboard!'.tr('မိတ်ဆက်ကုဒ်ကို ကူးယူပြီးပါပြီ!'));
+                            HimoToast.show(context, 'Referral code copied to clipboard!');
                           },
                         ),
                       ],
